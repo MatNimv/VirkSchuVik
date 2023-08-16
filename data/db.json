@@ -1,0 +1,22 @@
+{
+    "articles": [
+        {
+            "title": "min nya mössa",
+            "body": "13k mm garn, ull.", 
+            "author": "Kajjan", 
+            "id":1
+        },
+        {
+            "title": "den tusonde kudden", 
+            "body": "började om 4ggr.", 
+            "author": "Luce", 
+            "id":2
+        },
+        {
+            "title": "byxor?", 
+            "body": "behöver jag blocka byxorna?", 
+            "author": "Matt", 
+            "id":3
+        }
+    ]
+}
