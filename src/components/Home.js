@@ -1,33 +1,17 @@
-import { useState, useEffect } from "react";
 import ArticleList from "./ArticleList";
+import useFetch from "../functions/useFetch";
 
 const Home = () => {
 
-    const [articles, setArticles] = useState(null);
-
-    const handleDelete = (id) => {
-        const newArticles = articles.filter(art => art.id !== id);
-        setArticles(newArticles);
-    }
-
-    useEffect(() => {
-        console.log('use effect');
-
-        fetch("http://localhost:3000/articles")
-            .then(response => {
-                console.log(response);
-                return response.json()
-            })
-            .then((data) => {
-                console.log(data);
-            })
-    }, []);
-
+    //data kallas för articles i denna kontexten
+    const {data: articles, isLoading, error} = useFetch("http://localhost:8000/articles");
 
     return ( 
         <div className="Hem">
             <h2>Artiklar</h2>
-            {/*<ArticleList articles={articles} handleDelete={handleDelete}></ArticleList>*/}
+            {error && <div>{error}</div>}
+            { isLoading && <div>Loading...</div>}
+            {articles && <ArticleList articles={articles} ></ArticleList>}
         </div>
     );
 }
