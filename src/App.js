@@ -6,6 +6,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NotFound from './components/notFound';
 
 function App() {
+  //för varje sida som finns i appen behövs en
+  //<Route></Route> vara omringad kring komponenten som innehåller sidan. 
+
   return (
     <Router>
       <div className="App">

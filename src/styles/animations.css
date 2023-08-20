@@ -1,0 +1,29 @@
+/*brukar bli så kladdigt med animationseffekter*/
+
+/* stroke */
+nav a,
+nav :after,
+nav:before {
+  transition: all .5s;
+}
+nav a:hover {
+  color: var(--white);
+}
+
+nav a:after{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: var(--white);
+  height: 1px;
+}
+nav a:hover:after {
+  width: 100%;
+}
+
+

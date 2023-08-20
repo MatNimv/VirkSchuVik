@@ -1,12 +1,12 @@
-import '../styles/NavBar.css';
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import '../styles/animations.css';
 
 const NavBar = () => {
     return ( 
-        <nav className="NavBar title">
+        <nav>
             <h1>VirkSchuVik</h1>
-            <div>
-                <Link to="/">Home</Link>
+            <div className='stroke'>
+                <Link to="/">Hem</Link>
                 <Link to="/create">Nytt</Link>
                 <Link to="/omOss">Om Oss</Link>
             </div>

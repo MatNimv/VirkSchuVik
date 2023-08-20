@@ -30,5 +30,5 @@ const ArticleDetails = () => {
         </div>
     );
 }
- 
+
 export default ArticleDetails;

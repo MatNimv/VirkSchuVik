@@ -1,8 +1,54 @@
+/*denna fil har regler som förekommer på alla sidor av appen.*/
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-.title{
-    color: rgb(93, 132, 201);
-    font-family: "Montserrat";
+/*CUSTOM VARIABLES*/
+:root{
+    /*COLORS*/
+    --main-purple: #6F6FB3;
+    --main-beige: #FFE1D1;
+    --accent-purple: #B7B7FF;
+    --main-green: #B5FF9E;
+    --accent-green: #77B664;
+
+    --white: white;
+
+    /*FONTS*/
+    --main-font-title: 'Montserrat';
 }
 
+body{
+    margin: 0px;
+}
+a{text-decoration: none;}
 
+nav, h1,h2,h3,h4,h5,h6{
+    font-family: var(--main-font-title);
+    font-weight: 700;
+}
+
+/*NAVBAR*/
+nav{
+    height: 10%;
+    background-color: var(--main-purple);
+
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-between;
+
+    padding: 0px 20px;
+}
+nav h1{
+    font-weight:800; 
+}
+nav > div{
+    display:flex;
+    width: 40%;
+    justify-content: space-around;
+}
+nav > div a{
+    color: var(--main-beige);
+    position: relative;
+    padding-bottom: 5px;
+}

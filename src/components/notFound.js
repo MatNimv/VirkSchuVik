@@ -6,7 +6,7 @@ const NotFound = () => {
             <p>sry hittas inte</p>
             <Link to="/">Hem igen</Link>
         </div>
-     );
+    );
 }
- 
+
 export default NotFound;
