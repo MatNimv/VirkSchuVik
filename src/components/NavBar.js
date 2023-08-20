@@ -7,7 +7,7 @@ const NavBar = () => {
             <h1>VirkSchuVik</h1>
             <div className='stroke'>
                 <Link to="/">Hem</Link>
-                <Link to="/create">Nytt</Link>
+                <Link to="/projekt">Projekt</Link>
                 <Link to="/omOss">Om Oss</Link>
             </div>
         </nav>

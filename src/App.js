@@ -1,9 +1,9 @@
 import NavBar from './components/NavBar';
-import Home from './components/Home';
-import Create from './components/Create';
+import Home from './routes/Home';
+import Create from './routes/Create';
+import NotFound from './routes/NotFound';
 import ArticleDetails from './components/articleDetails';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import NotFound from './components/notFound';
 
 function App() {
   //för varje sida som finns i appen behövs en
