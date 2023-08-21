@@ -1,6 +1,9 @@
 /*denna fil har regler som förekommer på alla sidor av appen.*/
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Ruwudu&display=swap');
+/*fina fonter värda att ta en titt på:
+Quicksand, Lora, 
 
 /*CUSTOM VARIABLES*/
 :root{
@@ -14,7 +17,8 @@
     --white: white;
 
     /*FONTS*/
-    --main-font-title: 'Montserrat';
+    --main-title-text: 'Montserrat';
+    --main-body-text: 'Ruwudu';
 
     /*MISC*/
     --shadow: 1px 3px 5px rgba(0,0,0,0.1);
@@ -22,11 +26,15 @@
 
 body{
     margin: 0px;
+    height:100vh;
+    overflow-x:hidden;
 }
 a{text-decoration: none;}
 
+p{font-family: var(--main-body-text);}
+
 nav, h1,h2,h3,h4,h5,h6{
-    font-family: var(--main-font-title);
+    font-family: var(--main-title-text);
     font-weight: 700;
 }
 
@@ -41,18 +49,22 @@ nav{
     justify-content: space-between;
 
     box-shadow: var(--shadow);
-    transition: 0.4s; /* Adds a transition effect when the padding is decreased */
+    transition: all 0.4s; /* Adds a transition effect when the padding is decreased */
     position: fixed; /* Sticky/fixed navbar */
     width: 100%;
     top: 0; /* At the top */
     z-index: 99; 
 }
 .scrollisfalse{
-    padding: 5vh 20px; /* Large padding which will shrink on scroll (using JS) */
+    padding: 3vh 20px; /* Large padding which will shrink on scroll (using JS) */
 }
 .scrollistrue{
     padding: 0vh 20px;
 }
+.scrollistrue a{font-size: medium;}
+.scrollistrue h1{font-size: x-large;}
+.scrollisfalse h1{font-size: xx-large;}
+.scrollisfalse a{font-size: x-large;}
 nav h1{
     font-weight:800; 
 }
@@ -66,4 +78,27 @@ nav > div a{
     position: relative;
     padding-bottom: 5px;
     font-size: larger;
+}
+
+/*FOOTER*/
+
+footer{
+    margin-top: 10vh;
+    height: 30vh;
+    width: 100vw;
+    background-color: var(--main-purple);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.footerInfo{
+    width: 40vw;
+    margin-left: 2vw;
+}
+.footerLinks{
+    margin-right: 15vw;
+    
+}
+.footerLinks a{
+    color: var(--main-beige);
 }

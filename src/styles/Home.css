@@ -1,11 +1,5 @@
-/*artiklar*/
-.article{
-    transition:all 0.5s ease-in;
-}
-.article:hover{
-    box-shadow: var(--shadow);
-}
-.wrapper{
+/*VIDEO*/
+.videoWrapper{
     position:relative;
     height: calc(100vh - 80px);
     margin-bottom: 200px;
@@ -14,9 +8,9 @@
 .gradientWrapper {
     position: absolute;
     width: 100%;
-  }
-  
-  .gradient {
+}
+
+.gradient {
     background: rgba(255, 255, 255, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 10%, rgba(255, 255, 255, .1) 40%, rgba(255, 255, 255, .5) 75%, rgba(255, 255, 255, 1) 100%) repeat scroll 0 0;
     width: 100%;
     height: calc(100vh - 80px);
@@ -24,9 +18,9 @@
     object-fit: cover;
     position: relative;
     z-index: 2;
-  }
-  
-  video {
+}
+
+video {
     position: absolute;
     top: 0;
     z-index: -1;
@@ -34,4 +28,33 @@
     height: calc(100vh - 80px);
     min-height: 600px;
     object-fit: cover;
-  }
+}
+
+/*TITEL*/
+.introWrapper{
+    margin-left: 5vw;
+    position: absolute;
+    bottom: -10vh;
+    z-index: 5;
+}
+.introWrapper h1{
+    margin-top:0px;
+    font-size: 80px;
+
+}
+.introWrapper > div{
+    width: 40vw; 
+}
+
+.introWrapper > button{
+    border-color: var(--main-green);
+}
+
+
+/*ARTIKLAR(?)*/
+.article{
+    transition:all 0.5s ease-in;
+}
+.article:hover{
+    box-shadow: var(--shadow);
+}

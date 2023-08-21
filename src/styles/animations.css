@@ -1,16 +1,16 @@
 /*brukar bli så kladdigt med animationseffekter*/
 
-/* stroke */
-nav a,
-nav :after,
-nav:before {
+/* .stroke */
+.stroke a,
+.stroke :after,
+.stroke:before {
   transition: all .5s;
 }
-nav a:hover {
+.stroke a:hover {
   color: var(--white);
 }
 
-nav a:after{
+.stroke a:after{
   position: absolute;
   bottom: 0;
   left: 0;
@@ -22,8 +22,27 @@ nav a:after{
   background: var(--white);
   height: 1px;
 }
-nav a:hover:after {
+.stroke a:hover:after {
   width: 100%;
 }
 
+/*BUTTONS*/
+button {
+  transition: all .5s ease;
+  color: var(--accent-green);
+  border: 3px solid var(--accent-green);
+  font-family:'Montserrat', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  font-size: 17px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 4px;
+}
+button:hover {
+  color: black;
+  background-color: var(--accent-green);
+}
 

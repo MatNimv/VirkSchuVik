@@ -1,4 +1,5 @@
 import NavBar from './components/NavBar';
+import Footer from './components/Footer'
 import Home from './routes/Home';
 import Create from './routes/Create';
 import NotFound from './routes/NotFound';
@@ -12,9 +13,11 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <NavBar></NavBar>
         <header className="App-header">
+          <NavBar></NavBar>
+        </header>
         <Switch>
+          <main className='App-main'>
           <Route exact path="/">
             <Home></Home>
           </Route>
@@ -27,10 +30,12 @@ function App() {
           <Route path="*">
             <NotFound></NotFound>
           </Route>
+          </main>
         </Switch>
-        </header>
+      <Footer></Footer>
       </div>
     </Router>
+    
   );
 }
 

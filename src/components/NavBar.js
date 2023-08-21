@@ -28,7 +28,7 @@ const NavBar = () => {
 
     return ( 
         <nav className={`scrollis${isShrunk.toString()}`}>
-            <h1>VirkSchuVik</h1>
+            <h1>V S V</h1>
             <div className='stroke'>
                 <Link to="/">Hem</Link>
                 <Link to="/projekt">Projekt</Link>
