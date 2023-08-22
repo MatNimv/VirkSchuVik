@@ -29,6 +29,10 @@ body{
     height:100vh;
     overflow-x:hidden;
 }
+
+.App-header{
+    margin-top: 15vh; /*plus minus nav*/
+}
 a{text-decoration: none;}
 
 p{font-family: var(--main-body-text);}

@@ -1,0 +1,20 @@
+{
+    "personer" : [
+        {
+            "name": "Kajjan",
+            "age": 27,
+            "do": "work",
+            "id": 1
+        },{
+            "name": "Luce",
+            "age": 30,
+            "do": "work n' study",
+            "id": 2
+        },{
+            "name": "Matt",
+            "age": 24,
+            "do": "study",
+            "id": 3
+        }
+    ]
+}

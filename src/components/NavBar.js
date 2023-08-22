@@ -17,8 +17,7 @@ const NavBar = () => {
                             document.body.scrollTop < 4 &&
                             document.documentElement.scrollTop < 4)
                             {return false}
-
-                            console.log(isShrunk);
+                            
                             return isShrunk;
             })
         }

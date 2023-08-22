@@ -1,8 +1,9 @@
 import NavBar from './components/NavBar';
 import Footer from './components/Footer'
 import Home from './routes/Home';
-import Create from './routes/Create';
+import Projekt from './routes/Projekt';
 import NotFound from './routes/NotFound';
+import OmOss from './routes/OmOss';
 import ArticleDetails from './components/articleDetails';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -13,29 +14,29 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <NavBar></NavBar>
         <header className="App-header">
-          <NavBar></NavBar>
-        </header>
         <Switch>
-          <main className='App-main'>
           <Route exact path="/">
             <Home></Home>
           </Route>
-          <Route path="/create">
-            <Create></Create>
+          <Route path="/projekt">
+            <Projekt></Projekt>
           </Route>
           <Route path="/articles/:id">
             <ArticleDetails></ArticleDetails>
           </Route>
+          <Route path="/omOss">
+            <OmOss></OmOss>
+          </Route>
           <Route path="*">
             <NotFound></NotFound>
           </Route>
-          </main>
         </Switch>
-      <Footer></Footer>
+        </header>
       </div>
+      <Footer></Footer>
     </Router>
-    
   );
 }
 
