@@ -17,7 +17,6 @@ function App() {
           <NavBar></NavBar>
         </header>
         <Switch>
-          <main className='App-main'>
           <Route exact path="/">
             <Home></Home>
           </Route>
@@ -30,7 +29,6 @@ function App() {
           <Route path="*">
             <NotFound></NotFound>
           </Route>
-          </main>
         </Switch>
       <Footer></Footer>
       </div>

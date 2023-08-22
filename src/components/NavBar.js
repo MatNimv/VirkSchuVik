@@ -18,7 +18,6 @@ const NavBar = () => {
                             document.documentElement.scrollTop < 4)
                             {return false}
 
-                            console.log(isShrunk);
                             return isShrunk;
             })
         }
