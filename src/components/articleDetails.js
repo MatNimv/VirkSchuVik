@@ -1,6 +1,7 @@
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "../functions/useFetch";
 
+/*
 const ArticleDetails = () => {
     const {id} = useParams();
     const {data: article, error, isLoading} = useFetch('http://localhost:8000/articles/' + id);
@@ -31,4 +32,4 @@ const ArticleDetails = () => {
     );
 }
 
-export default ArticleDetails;
+export default ArticleDetails;*/

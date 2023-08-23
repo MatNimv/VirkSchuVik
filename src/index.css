@@ -102,3 +102,9 @@ footer{
 .footerLinks a{
     color: var(--main-beige);
 }
+
+/*NOT FOUND*/
+
+.notFound{
+    margin-top: 20vh;
+}

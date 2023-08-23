@@ -1,12 +1,13 @@
 import NavBar from './components/NavBar';
 import Footer from './components/Footer'
 import Home from './routes/Home';
-import Create from './routes/Create';
 import NotFound from './routes/NotFound';
-import ArticleDetails from './components/articleDetails';
+import OmOss from './routes/OmOss';
+//import ArticleDetails from './components/articleDetails';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
+
   //för varje sida som finns i appen behövs en
   //<Route></Route> vara omringad kring komponenten som innehåller sidan. 
 
@@ -20,11 +21,11 @@ function App() {
           <Route exact path="/">
             <Home></Home>
           </Route>
-          <Route path="/create">
-            <Create></Create>
-          </Route>
-          <Route path="/articles/:id">
+          {/*<Route path="/articles/:id">
             <ArticleDetails></ArticleDetails>
+          </Route>*/}
+          <Route exaxt path="/OmOss">
+            <OmOss></OmOss>
           </Route>
           <Route path="*">
             <NotFound></NotFound>
