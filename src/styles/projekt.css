@@ -1,0 +1,6 @@
+#projektWrapper{
+    width: var(--main--page-width);
+}
+#projektWrapper img{
+    width: 100%;
+}

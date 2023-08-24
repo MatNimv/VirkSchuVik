@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import LoremIpsum from './LoremIpsum';
 
 const Footer = () => {
     return ( 
         <footer>
             <div className="footerInfo">
                 <img alt="V S V"></img>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In volutpat massa vel pharetra tempus. Maecenas sed vehicula diam, ac venenatis lectus. Aliquam id imperdiet lectus. Curabitur pretium orci in est consequat maximus.</p>
+                <LoremIpsum></LoremIpsum>
             </div>
             <div className="footerLinks stroke">
                 <h4><Link to="/projekt">Projekt</Link></h4>

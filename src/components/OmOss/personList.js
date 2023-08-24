@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import firebase from '../firebase';
+import firebase from '../../firebase';
 import { useEffect } from 'react';
+import LoremIpsum from '../LoremIpsum';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const PersonList = () => {
 
@@ -32,17 +34,18 @@ const PersonList = () => {
 
     return ( 
         <div id="personListWrapper">
-        <h1>Om Oss</h1>
         {people.map((pep) => (
+            
             <div className="person" key={pep.id}>
-                <h3>{pep.name}</h3>
-                <p>{pep.description}</p>
+                <img src={pep.profilePic} alt={`Bild på ${pep.name}`}></img>
+                <h3>{pep.fname} {pep.lname}</h3>
+                <p>{pep.description} & <LoremIpsum></LoremIpsum></p>
                 <p>Min favoritvirkning: {pep.favorite}</p>
+                <p>Se {pep.fname}s <Link to="">projekt!</Link></p>
             </div>
             ))}
         </div>
     );
-
 }
 
 export default PersonList;

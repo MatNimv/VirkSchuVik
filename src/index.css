@@ -20,6 +20,10 @@ Quicksand, Lora,
     --main-title-text: 'Montserrat';
     --main-body-text: 'Ruwudu';
 
+    /*SIZES*/
+    --main--page-width: 70vw;
+    --main-margin: 50px;
+
     /*MISC*/
     --shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
@@ -28,6 +32,22 @@ body{
     margin: 0px;
     height:100vh;
     overflow-x:hidden;
+}
+
+main{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;;
+}
+
+
+main > div{
+    margin-top:25vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 a{text-decoration: none;}
 

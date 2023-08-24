@@ -1,6 +1,29 @@
 #omOssWrapper{
-    margin-top:30vh;
     display:flex;
     align-items: center;
     flex-direction: column;
+    width: var(--main--page-width)
 }
+#omOssWrapper > p{
+    text-align: center;
+}
+
+/*PERSONER*/
+#personListWrapper{
+    display:flex;
+    justify-content: space-between;
+    width:100%;
+    margin-top: var(--main-margin);
+
+}
+.person{
+    width: 20vw;
+}
+.person h3{text-align: center;}
+.person img{
+    width:100%;
+    background-position: center;
+    background-size: cover;
+    border-radius: 150px;
+}
+

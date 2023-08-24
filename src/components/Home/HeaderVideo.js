@@ -3,7 +3,7 @@ import HeaderText from './HeaderText'
 
 const HeaderVideo = () => {
     return ( 
-        <div className='videoWrapper'>
+        <div id='videoWrapper'>
             <div className='gradientWrapper'>
                 <div className='gradient'></div>
                 <video autoPlay loop>

@@ -10,7 +10,7 @@ const Home = () => {
     //const {data: articles, isLoading, error} = useFetch("http://localhost:8000/articles");
 
     return ( 
-        <div className="Hem">
+        <div id="homeWrapper">
             <HeaderVideo></HeaderVideo>
             <h2>Artiklar</h2>
             {/*{error && <div>{error}</div>}
