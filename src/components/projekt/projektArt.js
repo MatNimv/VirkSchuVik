@@ -10,13 +10,12 @@ import GetDocument from '../../functions/getDocument';
 
 const ProjektArt = () => {
 
-
     const [projekt, setProjekt] = useState([]);
-    const [loading, setLoading] = useState(false);
+
     const {id} = useParams();
 
     console.log(id);
-    const {data: projekts, error} = GetDocument("projekt", "id", id);
+    const {data: projekts, error, loading} = GetDocument("projekt", "id", id);
 
     console.log(projekts);
 

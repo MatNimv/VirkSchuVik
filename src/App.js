@@ -5,6 +5,7 @@ import NotFound from './routes/NotFound';
 import OmOss from './routes/OmOss';
 import Projekt from './routes/Projekt';
 import ProjektArt from './components/projekt/projektArt';
+import Skapa from './routes/Skapa';
 //import ArticleDetails from './components/articleDetails';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path="/projekt/:author">
             <ProjektArt></ProjektArt>
+          </Route>
+          <Route path="/skapa">
+            <Skapa></Skapa>
           </Route>
           <Route path="/projekt">
             <Projekt></Projekt>
