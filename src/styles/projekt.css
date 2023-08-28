@@ -4,3 +4,11 @@
 #projektWrapper img{
     width: 100%;
 }
+
+/*EN ARTIKEL*/
+#projektArtWrapper{
+    width: var(--main--page-width);
+}
+#projektArtWrapper img{
+    width: 100%;
+}

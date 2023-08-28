@@ -4,6 +4,7 @@ import Home from './routes/Home';
 import NotFound from './routes/NotFound';
 import OmOss from './routes/OmOss';
 import Projekt from './routes/Projekt';
+import ProjektArt from './components/projekt/projektArt';
 //import ArticleDetails from './components/articleDetails';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -26,6 +27,12 @@ function App() {
           {/*<Route path="/articles/:id">
             <ArticleDetails></ArticleDetails>
           </Route>*/}
+          <Route path="/projekt/:id">
+            <ProjektArt></ProjektArt>
+          </Route>
+          <Route path="/projekt/:author">
+            <ProjektArt></ProjektArt>
+          </Route>
           <Route path="/projekt">
             <Projekt></Projekt>
           </Route>

@@ -29,7 +29,7 @@ const PersonList = () => {
     }, [])
 
     if (loading){
-        return <h1>Loading...</h1>
+        return <h1>Laddar...</h1>
     }
 
     return ( 
@@ -41,7 +41,7 @@ const PersonList = () => {
                 <h3>{pep.fname} {pep.lname}</h3>
                 <p>{pep.description} & <LoremIpsum></LoremIpsum></p>
                 <p>Min favoritvirkning: {pep.favorite}</p>
-                <p>Se {pep.fname}s <Link to="">projekt!</Link></p>
+                <p>Se {pep.fname}s <Link to={`/projekt/${pep.fname}`}>projekt!</Link></p>
             </div>
             ))}
         </div>
