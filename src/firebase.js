@@ -1,5 +1,8 @@
 import 'firebase/compat/firestore';
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/storage';
+import { getStorage } from 'firebase/storage';
+import { getDatabase } from "firebase/database";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -16,5 +19,6 @@ const firebaseConfig = {
   //REACT_APP_FIREBASE_SENDER_ID=""
 
 firebase.initializeApp(firebaseConfig);
-
+export const storage = getStorage();
+//export const db = getDatabase(firebase.initializeApp(firebaseConfig))
 export default firebase;
