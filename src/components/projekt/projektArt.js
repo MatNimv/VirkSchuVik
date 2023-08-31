@@ -60,15 +60,13 @@ const ProjektArt = () => {
                     <img src={pro.hero} alt={pro.title}></img>
                     <p>{pro.body}</p>
                 </div>
-                {pro.info.map((inf) => (
-                <div className='projektInfo' key={inf.id}>
+                <div className='projektInfo' key={pro.id}>
                     <ul>
-                        <li>Typ av garn: {inf.yarn}</li>
-                        <li>Garn köpt: {inf.bought}</li>
-                        <li>Storlek på hook: {inf.hook}mm</li>
+                        <li>Typ av garn: {pro.yarn}</li>
+                        <li>Garn köpt: {pro.bought}</li>
+                        <li>Storlek på hook: {pro.hook}mm</li>
                     </ul>
                 </div>
-                ))}
             </div>
             ))}
             

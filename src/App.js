@@ -6,6 +6,7 @@ import OmOss from './routes/OmOss';
 import Projekt from './routes/Projekt';
 import ProjektArt from './components/projekt/projektArt';
 import Skapa from './routes/Skapa';
+import Login from './routes/Login';
 //import ArticleDetails from './components/articleDetails';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -42,6 +43,9 @@ function App() {
           </Route>
           <Route path="/omOss">
             <OmOss></OmOss>
+          </Route>
+          <Route path="/login">
+            <Login></Login>
           </Route>
           <Route path="*">
             <NotFound></NotFound>

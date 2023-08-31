@@ -19,13 +19,12 @@ const ProjektList = () => {
             QuerySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
-            items.forEach((item) => {
-                if(item.author === author){
-                    items = [];
-                    items.push(item);
-                    console.log(item.author);
-                }
-            })
+            //items.forEach((item) => {
+            //    if(item.author === author){
+            //        items = [];
+            //        items.push(item);
+            //    }
+            //})
             console.log(items);
             setProjekt(items);
             setLoading(false);
