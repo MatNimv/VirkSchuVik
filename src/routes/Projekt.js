@@ -5,7 +5,7 @@ const Projekt = () => {
     return ( 
         <div id="projektWrapper">
             <h1>
-                Våra Projekt
+                Våra Senaste Projekt
             </h1>
             <ProjektList></ProjektList>
         </div>

@@ -1,11 +1,96 @@
 #projektWrapper{
     width: var(--main--page-width);
 }
-#projektWrapper img{
-    width: 100%;
+
+#projektWrapper h1{
+    margin-bottom: var(--main-margin);
 }
 
-/*EN ARTIKEL*/
+/*PROJEKT I LISTAN /PROJEKT*/
+
+#projektListWrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.oneProjektWrapper{
+    background-color: var(--accent-purple);
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+
+    transition: bottom ease-in .3s;
+    transition: box-shadow ease-in .1s;
+
+    position:relative;
+    bottom: 0px;
+    padding: 20px;
+    box-shadow: var(--shadow-light);
+    margin-bottom: var(--main-margin);
+    border-radius: var(--main-border-radius-s);
+}
+
+.oneProjektWrapper a {
+    text-decoration: none;
+}
+
+.oneProjektWrapper:hover{
+    position:relative;
+    bottom: 1vh;
+    box-shadow: var(--shadow-dark);
+}
+
+.oneProjektWrapper img{
+    width: 20vw;
+    height:50vh;
+    background-position: center;
+    background-size:contain;
+}
+
+.projektInfo{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /*fick inte till storleken på bredden skulle följa föräldern
+    så den får vara en vw istället sålänge*/
+    width: var(--main--page-width);
+}
+
+.projektText{
+    display:flex;
+    flex-direction: column;
+    width: 50%;
+    height: 60%;
+    color: var(--main-beige);
+}
+.projektText p{
+    margin: 5px;
+    
+}
+.projektText a{color: var(--main-beige);}
+
+.projektText h2{color: var(--main-white)}
+
+.oneProjektWrapper .projektText{
+    display:flex;
+    justify-content: start;
+} 
+.oneProjektWrapper img{
+    display:flex;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 35%;
+    height: 60%;
+    border-radius: 20px;
+    position: relative;
+    border-color: 2px var(--accent-purple);
+
+}
+
+/*EN INKLICKAD ARTIKEL */
 #projektArtWrapper{
     width: var(--main--page-width);
 }

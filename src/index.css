@@ -13,6 +13,7 @@ Quicksand, Lora,
     --accent-purple: #B7B7FF;
     --main-green: #B5FF9E;
     --accent-green: #77B664;
+    --main-white: white;
 
     --white: white;
 
@@ -23,9 +24,12 @@ Quicksand, Lora,
     /*SIZES*/
     --main--page-width: 70vw;
     --main-margin: 50px;
+    --main-border-radius: 20px;
+    --main-border-radius-s: 5px;
 
     /*MISC*/
-    --shadow: 1px 3px 5px rgba(0,0,0,0.1);
+    --shadow-light: 1px 3px 5px rgba(0,0,0,0.1);
+    --shadow-dark: 7px 10px 10px rgba(0,0,0,0.1);
 }
 
 body{
@@ -49,7 +53,8 @@ main > div{
     justify-content: center;
     flex-direction: column;
 }
-a{text-decoration: none;}
+a{text-decoration: none; cursor:pointer;}
+button{cursor:pointer;}
 
 p{font-family: var(--main-body-text);}
 

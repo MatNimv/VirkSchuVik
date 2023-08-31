@@ -40,9 +40,17 @@ const Skapa = () => {
             alert("Välj en bild tack.");
             return;
         } else {
-            const imageRef = storageRef(storage, `/projekt/${id}`)
+            const imageRef = storageRef(storage, `/projekt/${id}/${id}`)
             
             uploadBytes(imageRef, imageUpload)
+            //.on(
+            //        "state_changed",
+            //        (snapshot) => {
+            //            const percent = Math.round(
+            //                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            //            );
+            //            // update progress
+            //            setPercent(percent);
                 .then((snapshot) => {
                     getDownloadURL(snapshot.ref)
                         .then((url) => {
@@ -56,29 +64,8 @@ const Skapa = () => {
                     alert(error.message);
                 })
 
-            //const uploadTask = uploadBytesResumable(storageRef, imageUpload);
-            //const storageRef = ref(storage, `/projekt/${id}`);
+                console.log(storageUrl);
 
-            //uploadTask.on(
-            //    "state_changed",
-            //    (snapshot) => {
-            //        const percent = Math.round(
-            //            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            //        );
-            //        // update progress
-            //        setPercent(percent);
-            //    },
-            //    (err) => console.log(err),
-            //    () => {
-            //        // download url
-            //        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            //            console.log(url);
-            //            setStorageUrl(`${url}`);
-            //        });
-            //    }
-            //)
-
-            
             //allt gick bra, nu skicka till firebase
             AddProjekt({ title, 
                 body, 
@@ -88,6 +75,7 @@ const Skapa = () => {
                 hero: storageUrl,
                 id: id,
                 date: getDate(),
+                author: author
                 });
             setTitle("");
             setBody("");
@@ -118,7 +106,7 @@ const Skapa = () => {
                                     setImageUpload(event.target.files[0])
                                 }}>
                 </input>
-                <button onClick={() => {
+                <button type="submit" onClick={() => {
                             handleUpload();
                             }}>
                     Lägg till

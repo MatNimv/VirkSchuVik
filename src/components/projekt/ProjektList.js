@@ -7,8 +7,8 @@ const ProjektList = () => {
     const [projekt, setProjekt] = useState([]);
     const [loading, setLoading] = useState(false);
     const {author} = useParams();
-    //kan göras snyggare, vet
-    //let authors = ['Matilda', 'Lucas', 'Kajsa'];
+    const [numProjekts, setNumProjects] = useState(0);
+    const [gridStyle, setGridStyle] = useState("");
 
     const ref = firebase.firestore().collection("projekt");
 
@@ -19,15 +19,15 @@ const ProjektList = () => {
             QuerySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
-            //items.forEach((item) => {
-            //    if(item.author === author){
-            //        items = [];
-            //        items.push(item);
-            //    }
-            //})
-            console.log(items);
+
+            setNumProjects(items.length);
             setProjekt(items);
             setLoading(false);
+
+            //beroende på antal projekt, stylas en grid
+            if(items.length ){
+
+            }
         });
     }
 
@@ -42,16 +42,19 @@ const ProjektList = () => {
     return ( 
         <div id="projektListWrapper">
         {projekt.map((pro) => (
-            <div className="projekt" key={pro.id}>
-                <Link to={`projekt/${pro.id}`}>
-                    <div className='projektWrapper'>
-                        <h2>{pro.title}</h2>
-                        <p>av {pro.author}</p>
-                        <p>{pro.date}</p>
+            <div className="oneProjektWrapper" key={pro.id}>
+                <Link to={`projekt/${pro.id}`} >
+                    <div className='projektInfo'>
+                        <div className='projektText'>
+                            <h2>{pro.title}</h2>
+                            <p>Skapad av: <Link className='strokeText' to={`/projekt${pro.author}/`}>{pro.author}</Link></p>
+                            <p>{pro.date}</p>
+                        </div>
                         <img src={pro.hero} alt={pro.title}></img>
                     </div>
                 </Link>
             </div>
+            
             ))}
             
         </div>

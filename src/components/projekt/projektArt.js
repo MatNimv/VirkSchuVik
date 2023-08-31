@@ -15,9 +15,9 @@ const ProjektArt = () => {
     const {id} = useParams();
 
     console.log(id);
-    const {data: projekts, error, loading} = GetDocument("projekt", "id", id);
+    //const {data: projekts, error, loading} = GetDocument("projekt", "id", id);
 
-    console.log(projekts);
+    //console.log(projekts);
 
 
 //denna ska hämta ID av dokumentet, inte alla
@@ -41,26 +41,26 @@ const ProjektArt = () => {
     //    getProjekt();
     //}, [])
 
-    if (loading){
-        return <h2>Laddar in projekt...</h2>
-    }
-    if(error){
-        return <h2>Gick inte att ladda in.</h2>
-    }
+   //if (loading){
+   //    return <h2>Laddar in projekt...</h2>
+   //}
+   //if(error){
+   //    return <h2>Gick inte att ladda in.</h2>
+   //}
 
 
     return ( 
         <div id="projektArtWrapper">
         {projekt.map((pro) => (
             <div className="projekt" key={pro.id}>
-                <div className='projektWrapper'>
+                <div className='oneProjektArtWrapper'>
                     <h2>{pro.title}</h2>
                     <p>av {pro.author}</p>
                     <p>{pro.date}</p>
                     <img src={pro.hero} alt={pro.title}></img>
                     <p>{pro.body}</p>
                 </div>
-                <div className='projektInfo' key={pro.id}>
+                <div className='projektInfo'>
                     <ul>
                         <li>Typ av garn: {pro.yarn}</li>
                         <li>Garn köpt: {pro.bought}</li>

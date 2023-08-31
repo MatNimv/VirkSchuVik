@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import firebase from '../firebase';
 
-
+/*
 async function GetDocument(document, field, match) {
     const [data, setData] = useState([])
     const [error, setError] = useState(null);

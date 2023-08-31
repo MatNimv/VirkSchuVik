@@ -1,12 +1,12 @@
 /*brukar bli så kladdigt med animationseffekter*/
 
 /* .stroke */
-.stroke a,
-.stroke :after,
-.stroke:before {
+.stroke a, .strokeText,
+.stroke :after, .strokeText :after,
+.stroke:before, .strokeText:before {
   transition: all .5s;
 }
-.stroke a:hover {
+.stroke a:hover, .strokeText:hover {
   color: var(--white);
 }
 
@@ -22,9 +22,22 @@
   background: var(--white);
   height: 1px;
 }
-.stroke a:hover:after {
+.strokeText :after{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: var(--white);
+  height: 1px;
+}
+.stroke a:hover:after, .strokeText:hover:after {
   width: 100%;
 }
+
 
 /*BUTTONS*/
 button {
