@@ -26,7 +26,6 @@ const ProjektList = () => {
 
             //beroende på antal projekt, stylas en grid
             if(items.length ){
-
             }
         });
     }
@@ -48,7 +47,7 @@ const ProjektList = () => {
                         <div className='projektText'>
                             <h2>{pro.title}</h2>
                             <p>Skapad av: <Link className='strokeText' to={`/projekt${pro.author}/`}>{pro.author}</Link></p>
-                            <p>{pro.date}</p>
+                            <p>{pro.dateShow}</p>
                         </div>
                         <img src={pro.hero} alt={pro.title}></img>
                     </div>
