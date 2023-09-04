@@ -1,8 +1,5 @@
-import ArticleList from "../components/ArticleList";
 import HeaderVideo from "../components/Home/HeaderVideo";
-import useFetch from "../functions/useFetch";
 import '../styles/Home.css';
-
 
 const Home = () => {
 

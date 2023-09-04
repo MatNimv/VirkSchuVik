@@ -6,9 +6,10 @@ import OmOss from './routes/OmOss';
 import Projekt from './routes/Projekt';
 import ProjektArt from './components/projekt/projektArt';
 import Skapa from './routes/Skapa';
-import Login from './routes/Login';
+import Login from './auth/Login';
 //import ArticleDetails from './components/articleDetails';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { AuthProvider } from './auth/Auth';
 
 function App() {
 
@@ -16,6 +17,8 @@ function App() {
   //<Route></Route> vara omringad kring komponenten som innehåller sidan. 
 
   return (
+
+    
     <Router>
       <div className="App">
         <header className="App-header">
@@ -44,9 +47,9 @@ function App() {
           <Route path="/omOss">
             <OmOss></OmOss>
           </Route>
-          <Route path="/login">
-            <Login></Login>
-          </Route>
+            <Route path="/login">
+              <Login></Login>
+            </Route>
           <Route path="*">
             <NotFound></NotFound>
           </Route>

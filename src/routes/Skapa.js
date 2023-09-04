@@ -1,21 +1,29 @@
 import AddProjekt from '../functions/AddProjekt';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {v4 as uuidv} from 'uuid';
-import { db, storage } from "../firebase";
+import { storage } from "../firebase";
 import { ref as storageRef, 
-        uploadBytesResumable, 
         getDownloadURL, 
         uploadBytes 
     } from "firebase/storage";
 
-//import ref from 'firebase/compat/storage';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+import { auth, db, firebase } from "../firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { query, collection, getDocs, where } from "firebase/firestore";
 
 const Skapa = () => {
 
-    //infon till projekt
+    const [user, loading, error] = useAuthState(auth);
+    const history = useHistory();
+    const currentUser = auth.currentUser;
+    const [name, setName] = useState("");
+
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [author, setAuthor] = useState("Kajsa");
+    const [author, setAuthor] = useState("");
     const [yarn, setYarn] = useState("");
     const [hook, setHook] = useState("1mm");
     const [bought, setBought] = useState("");
@@ -30,6 +38,20 @@ const Skapa = () => {
     const [percent, setPercent] = useState(0);
     const [storageUrl, setStorageUrl] = useState("");
     const [imageUpload, setImageUpload] = useState(null);
+
+    //detta ska göras om till en komponent
+    async function fetchUserName() {
+        const uid = currentUser.uid;
+
+        try {
+            const q = query(collection(db, "people"), where("id", "==", uid));
+            const doc = await getDocs(q);
+            const data = doc.docs[0].data();
+            setName(data.fname);
+        } catch (err) {
+            alert("Ett fel uppstod när användardatan hämtades. Försök igen.");
+        }
+    }
 
     let hookArr = ["1", "2", "2,5", "3", "3,5", "4", "4,5", "5", "6", "7", "8", "9", "10"]
 
@@ -72,9 +94,8 @@ const Skapa = () => {
                 setStorageUrl(uploadFile);
             }
 
-            //..ooooch laddar upp alltet
-            AddProjekt({ 
-                title, 
+            //allt gick bra, nu skicka till firebase
+            AddProjekt({ title, 
                 body, 
                 hook, 
                 yarn,
@@ -93,6 +114,37 @@ const Skapa = () => {
             setBought("");
         }
 
+
+        //kolla om någon är inloggad eller ej
+        //if(currentUser !== null){
+        //    fetchUserName()
+        //} else {
+        //    //inget. får inte vara här
+        //    setTimeout(() => {
+        //        history.push("/");
+        //    }, 1000);
+        //    
+        //}
+        const autho = getAuth();
+        onAuthStateChanged(autho, (user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              const uid = user.uid;
+              console.log(user);
+              // ...
+            } else {
+                history.push("/");
+              // User is signed out
+              // ...
+            }
+          });
+
+        //useEffect(() => {
+        //    fetchUserName()
+        //}, [name]);
+//
+
     return ( 
         <div id="addProjektWrapper">
             <h1>Lägg till ett projekt</h1>
@@ -107,7 +159,7 @@ const Skapa = () => {
                     <input type="text" placeholder="1999" value={yearWr} onChange={(e) => setYearWr(e.target.value)}></input>
                 </div>
 
-                <select value={author} onChange={(e) => setAuthor(e.target.value)}>
+                <select value={name} onChange={(e) => setAuthor(e.target.value)}>
                     <option label="Kajsa" value="Kajsa"></option>
                     <option label="Lucas" value="Lucas"></option>
                     <option label="Matilda" value="Matilda"></option>
@@ -134,103 +186,3 @@ const Skapa = () => {
 }
 
 export default Skapa;
-
-            //.on(
-            //        "state_changed",
-            //        (snapshot) => {
-            //            const percent = Math.round(
-            //                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            //            );
-            //            // update progress
-            //            setPercent(percent);
-
-
-                        // progress can be paused and resumed. It also exposes progress updates.
-            // Receives the storage reference and the file to upload.
-            //const uploadTask = uploadBytesResumable(imageRef, imageUpload);
-//
-            //uploadTask.on(
-            //    "state_changed",
-            //    (snapshot) => {
-            //        const percent = Math.round(
-            //            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            //        );
-//
-            //        // update progress
-            //        console.log(percent);
-            //        setPercent(percent);
-            //        console.log(percent);
-            //    },
-            //    (err) => console.log(err),
-            //    () => {
-            //        // download url
-            //        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            //            console.log(url);
-            //            //..ooooch laddar upp alltet
-            //            AddProjekt({ 
-            //                title, 
-            //                body, 
-            //                hook, 
-            //                yarn,
-            //                bought,
-            //                hero: storageUrl,
-            //                id,
-            //                year,
-            //                month,
-            //                day,
-            //                author,
-            //                dateShow: getShowDate()
-            //                });
-            //            setTitle("");
-            //            setBody("");
-            //            setYarn("");
-            //            setBought("");
-                    
-            
-            //uploadBytes(imageRef, imageUpload)
-            //.then((snapshot) => {
-//
-            //        getDownloadURL(snapshot.ref)
-            //        setImageLoad(true)
-            //            .then((url) => {
-            //                setStorageUrl(url);
-            //                setImageLoad(false);
-            //            })
-            //            .catch((error) => {
-            //                alert(error.message);
-            //            })
-            //    })
-            //    .catch((error) => {
-            //        alert(error.message);
-            //    })
-//
-            //    console.log(storageUrl);
-            //    
-            //    setImageLoad(false);
-//
-            //    if (imageLoad){
-            //        return <h2>Laddar upp bild...</h2>
-            //    }
-//
-            //    if(!imageLoad){
-            //        //allt gick bra, nu skicka till firebase
-            //        //..ooooch laddar upp alltet
-            //        AddProjekt({ 
-            //            title, 
-            //            body, 
-            //            hook, 
-            //            yarn,
-            //            bought,
-            //            hero: storageUrl,
-            //            id,
-            //            year,
-            //            month,
-            //            day,
-            //            author,
-            //            dateShow: getShowDate()
-            //            });
-            //        setTitle("");
-            //        setBody("");
-            //        setYarn("");
-            //        setBought("");
-                
