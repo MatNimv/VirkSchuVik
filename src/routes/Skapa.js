@@ -3,21 +3,22 @@ import { useState } from "react";
 import {v4 as uuidv} from 'uuid';
 import { storage } from "../firebase";
 import { ref as storageRef, 
-        uploadBytesResumable, 
         getDownloadURL, 
         uploadBytes 
     } from "firebase/storage";
 
-import { auth, db } from "../firebase";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useAuthState } from "react-firebase-hooks/auth";
 
+import { auth, db } from "../firebase";
+import { query, collection, getDocs, where } from "firebase/firestore";
+
 const Skapa = () => {
 
-
-    const history = useHistory();
     const [user, loading, error] = useAuthState(auth);
+    const history = useHistory();
     const currentUser = auth.currentUser;
+    const [name, setName] = useState("");
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -28,6 +29,31 @@ const Skapa = () => {
     const [percent, setPercent] = useState(0);
     const [storageUrl, setStorageUrl] = useState("");
     const [imageUpload, setImageUpload] = useState(null);
+
+    //detta ska göras om till en komponent
+    async function fetchUserName() {
+        if(currentUser){
+            const uid = currentUser.uid;
+
+            try {
+                const q = query(collection(db, "people"), where("id", "==", uid));
+                const doc = await getDocs(q);
+                const data = doc.docs[0].data();
+                setName(data.fname);
+            } catch (err) {
+                alert("Ett fel uppstod när användardatan hämtades. Försök igen.");
+            }
+        }
+    }
+
+    //kolla om någon är inloggad eller ej
+    if(currentUser){
+        fetchUserName()
+    } else {
+        //inget. får inte vara här
+        history.push("/");
+        
+    }
 
     let hookArr = ["1", "2", "2,5", "3", "3,5", "4", "4,5", "5", "6", "7", "8", "9", "10"]
 
@@ -63,28 +89,6 @@ const Skapa = () => {
                     alert(error.message);
                 })
 
-            //const uploadTask = uploadBytesResumable(storageRef, imageUpload);
-            //const storageRef = ref(storage, `/projekt/${id}`);
-
-            //uploadTask.on(
-            //    "state_changed",
-            //    (snapshot) => {
-            //        const percent = Math.round(
-            //            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            //        );
-            //        // update progress
-            //        setPercent(percent);
-            //    },
-            //    (err) => console.log(err),
-            //    () => {
-            //        // download url
-            //        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            //            console.log(url);
-            //            setStorageUrl(`${url}`);
-            //        });
-            //    }
-            //)
-
             
             //allt gick bra, nu skicka till firebase
             AddProjekt({ title, 
@@ -104,9 +108,11 @@ const Skapa = () => {
     }
 
     //icke inloggad får inte vara på denna sida.
-    if(!currentUser){
-        history.push("/");
-    }
+    //if(!currentUser){
+    //    console.log(currentUser);
+    //    console.log(currentUser.uid);
+    //    history.push("/");
+    //}
 
     return ( 
         <div id="addProjektWrapper">
