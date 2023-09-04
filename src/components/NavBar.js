@@ -5,16 +5,12 @@ import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import firebase from '../firebase';
 
 const NavBar = () => {
     const [isShrunk, setShrunk] = useState(false);
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
-    const history = useHistory();
     const currentUser = auth.currentUser;
-    const [dbUsers, setUsers] = useState([])
 
     async function fetchUserName() {
         if(currentUser){
@@ -35,7 +31,7 @@ const NavBar = () => {
     if(currentUser){
         fetchUserName()
     } else {
-
+        //inget
     }
 
     const onScroll = () => {

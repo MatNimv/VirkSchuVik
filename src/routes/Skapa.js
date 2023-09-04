@@ -1,16 +1,23 @@
 import AddProjekt from '../functions/AddProjekt';
 import { useState } from "react";
 import {v4 as uuidv} from 'uuid';
-import { db, storage } from "../firebase";
+import { storage } from "../firebase";
 import { ref as storageRef, 
         uploadBytesResumable, 
         getDownloadURL, 
         uploadBytes 
     } from "firebase/storage";
 
-//import ref from 'firebase/compat/storage';
+import { auth, db } from "../firebase";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Skapa = () => {
+
+
+    const history = useHistory();
+    const [user, loading, error] = useAuthState(auth);
+    const currentUser = auth.currentUser;
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -94,6 +101,11 @@ const Skapa = () => {
             setYarn("");
             setBought("");
         }
+    }
+
+    //icke inloggad får inte vara på denna sida.
+    if(!currentUser){
+        history.push("/");
     }
 
     return ( 
