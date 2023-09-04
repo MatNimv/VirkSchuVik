@@ -25,20 +25,17 @@ const Login = () => {
             <div id="loginWrapper">
                 <input
                     type="text"
-                    className="login__textBox"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="E-mail Address"
                 />
                 <input
                     type="password"
-                    className="login__textBox"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                 />
                 <button
-                    className="login__btn"
                     onClick={() => logInWithEmailAndPassword(email, password)}>
                     Login
                 </button>
