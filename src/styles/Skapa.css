@@ -1,0 +1,54 @@
+#SkapaWrapper h1{
+    text-align: center;
+}
+
+.formContainer{
+    display:flex;
+    flex-direction: column;
+    padding: var(--main-margin);
+    box-shadow: var(--shadow-light);
+    border-radius: var(--main-border-radius);
+    align-items: center;
+}
+
+.formTop{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.dates{
+    display:flex;
+    flex-direction: row;
+}
+.dates input{
+    width: 20%;
+}
+
+textarea{
+    height: 60%;
+}
+.middleSpace{
+    width: 20%;
+}
+
+.projectInit, .projectGadgets{
+    display:flex;
+    flex-direction: column;
+    width:40%;
+}
+
+.formDivider{
+    height:2px;
+    background-color: var(--accent-purple);
+    width:100%;
+    margin: var(--main-margin) 0px 20px 0px;
+    border-radius:5px;
+}
+
+.formBottom{
+    display:flex;
+    flex-direction: column;
+    width: 40%;
+    align-items: center;
+}

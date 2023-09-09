@@ -56,6 +56,46 @@ main > div{
 a{text-decoration: none; cursor:pointer;}
 button{cursor:pointer;}
 
+/*FORM*/
+/*INPUT*/
+input,
+input[type="radio"] + label,
+input[type="checkbox"] + label:before,
+select option,
+select, textarea {
+
+    padding: 1em;
+    line-height: 1.4;
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+input, textarea{
+    margin-bottom: 20px;
+}
+
+input:focus,
+textarea:focus {
+    outline: 0;
+    border-color: var(--accent-purple);
+    }
+
+/*SELECT*/
+select:focus,
+select:active {
+    outline: 0;
+}
+select option {
+    background-color: var(--accent-purple);
+    color: #fff;
+}
+
 p{font-family: var(--main-body-text);}
 
 nav, h1,h2,h3,h4,h5,h6{

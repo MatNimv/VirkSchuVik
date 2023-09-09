@@ -1,21 +1,30 @@
 import AddProjekt from '../functions/AddProjekt';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {v4 as uuidv} from 'uuid';
-import { db, storage } from "../firebase";
+import { storage } from "../firebase";
 import { ref as storageRef, 
-        uploadBytesResumable, 
         getDownloadURL, 
         uploadBytes 
     } from "firebase/storage";
 
-//import ref from 'firebase/compat/storage';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+import { auth, db, firebase } from "../firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { query, collection, getDocs, where } from "firebase/firestore";
+import '../styles/Skapa.css';
 
 const Skapa = () => {
 
-    //infon till projekt
+    const [user, loading, error] = useAuthState(auth);
+    const history = useHistory();
+    const currentUser = auth.currentUser;
+    const [name, setName] = useState("");
+
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [author, setAuthor] = useState("Kajsa");
+    const [author, setAuthor] = useState("");
     const [yarn, setYarn] = useState("");
     const [hook, setHook] = useState("1mm");
     const [bought, setBought] = useState("");
@@ -30,6 +39,20 @@ const Skapa = () => {
     const [percent, setPercent] = useState(0);
     const [storageUrl, setStorageUrl] = useState("");
     const [imageUpload, setImageUpload] = useState(null);
+
+    //detta ska göras om till en komponent
+    async function fetchUserName() {
+        const uid = currentUser.uid;
+
+        try {
+            const q = query(collection(db, "people"), where("id", "==", uid));
+            const doc = await getDocs(q);
+            const data = doc.docs[0].data();
+            setName(data.fname);
+        } catch (err) {
+            alert("Ett fel uppstod när användardatan hämtades. Försök igen.");
+        }
+    }
 
     let hookArr = ["1", "2", "2,5", "3", "3,5", "4", "4,5", "5", "6", "7", "8", "9", "10"]
 
@@ -72,9 +95,8 @@ const Skapa = () => {
                 setStorageUrl(uploadFile);
             }
 
-            //..ooooch laddar upp alltet
-            AddProjekt({ 
-                title, 
+            //allt gick bra, nu skicka till firebase
+            AddProjekt({ title, 
                 body, 
                 hook, 
                 yarn,
@@ -93,144 +115,105 @@ const Skapa = () => {
             setBought("");
         }
 
-    return ( 
-        <div id="addProjektWrapper">
-            <h1>Lägg till ett projekt</h1>
-                <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-                <textarea placeholder="Beskrivning av projektet" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>
-                <input type="text" placeholder="Typ av garn" value={yarn} onChange={(e) => setYarn(e.target.value)} ></input>
-                <input type="text" placeholder="Var garnet är köpt" value={bought} onChange={(e) => setBought(e.target.value)} ></input>
-                <div className='dateMade'>
-                    <p>Datum projektet skapades dd-mån-åååå format: </p>
-                    <input type="text" placeholder="8" value={dayWr} onChange={(e) => setDayWr(e.target.value)}></input>
-                    <input type="text" placeholder="Feb" value={monthWr} onChange={(e) => setMonthWr(e.target.value)}></input>
-                    <input type="text" placeholder="1999" value={yearWr} onChange={(e) => setYearWr(e.target.value)}></input>
-                </div>
 
-                <select value={author} onChange={(e) => setAuthor(e.target.value)}>
-                    <option label="Kajsa" value="Kajsa"></option>
-                    <option label="Lucas" value="Lucas"></option>
-                    <option label="Matilda" value="Matilda"></option>
-                </select>
-                <select value={hook} onChange={(e) => setHook(e.target.value)}>
-                    {hookArr.map((hook) => 
-                        <option label={`${hook}mm`} value={`${hook}mm`} key={hook}></option>
-                    )}
-                </select>
-                
-                <input type="file" accept="image/*" 
+        //kolla om någon är inloggad eller ej
+        const autho = getAuth();
+        onAuthStateChanged(autho, (user) => {
+            if (user) {
+            console.log(user);
+              // ...
+            } else {
+                history.push("/");
+              // User is signed out
+              // ...
+            }
+        });
+    return ( 
+        //<div id="addProjektWrapper">
+        //    <h1>Lägg till ett projekt</h1>
+        //        <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+        //        <textarea placeholder="Beskrivning av projektet" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>
+        //        <input type="text" placeholder="Typ av garn" value={yarn} onChange={(e) => setYarn(e.target.value)} ></input>
+        //        <input type="text" placeholder="Var garnet är köpt" value={bought} onChange={(e) => setBought(e.target.value)} ></input>
+        //        <div className='dateMade'>
+        //            <p>Datum projektet skapades dd-mån-åååå format: </p>
+        //            <input type="text" placeholder="8" value={dayWr} onChange={(e) => setDayWr(e.target.value)}></input>
+        //            <input type="text" placeholder="Feb" value={monthWr} onChange={(e) => setMonthWr(e.target.value)}></input>
+        //            <input type="text" placeholder="1999" value={yearWr} onChange={(e) => setYearWr(e.target.value)}></input>
+        //        </div>
+//
+        //        <select value={name} onChange={(e) => setAuthor(e.target.value)}>
+        //            <option label="Kajsa" value="Kajsa"></option>
+        //            <option label="Lucas" value="Lucas"></option>
+        //            <option label="Matilda" value="Matilda"></option>
+        //        </select>
+        //        <select value={hook} onChange={(e) => setHook(e.target.value)}>
+        //            {hookArr.map((hook) => 
+        //                <option label={`${hook}mm`} value={`${hook}mm`} key={hook}></option>
+        //            )}
+        //        </select>
+        //        
+        //        <input type="file" accept="image/*" 
+        //                onChange={(event) => {
+        //                            setImageUpload(event.target.files[0])
+        //                        }}>
+        //        </input>
+        //        <p>{toString.percent} uppladdat</p>
+        //        <button type="submit" onClick={() => {
+        //                    handleUpload();
+        //                    }}>
+        //            Lägg till
+        //        </button>
+        //</div>
+        <div id="SkapaWrapper">
+            <h1>Lägg till ett projekt</h1>
+            <div className='formContainer'>
+                <div className='formTop'>
+                    <div className='projectInit'>
+                        <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+                        <textarea placeholder="Beskrivning av projektet" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>
+                        <select value={name} onChange={(e) => setAuthor(e.target.value)}>
+                            <option label="Kajsa" value="Kajsa"></option>
+                            <option label="Lucas" value="Lucas"></option>
+                            <option label="Matilda" value="Matilda"></option>
+                        </select>
+                    </div>
+                    <div className='middleSpace'></div>
+                    <div className='projectGadgets'>
+                    <input type="text" placeholder="Typ av garn" value={yarn} onChange={(e) => setYarn(e.target.value)} ></input>
+                        <input type="text" placeholder="Var garnet är köpt" value={bought} onChange={(e) => setBought(e.target.value)} ></input>
+                        <select value={hook} onChange={(e) => setHook(e.target.value)}>
+                            {hookArr.map((hook) => 
+                                <option label={`${hook}mm`} value={`${hook}mm`} key={hook}></option>
+                            )}
+                        </select>
+                        <div className='dateMade'>
+                            <p>Datum projektet skapades dd-mån-åååå format: </p>
+                            <div className='dates'>
+                                <input type="text" placeholder="8" value={dayWr} onChange={(e) => setDayWr(e.target.value)}></input>
+                                <input type="text" placeholder="Feb" value={monthWr} onChange={(e) => setMonthWr(e.target.value)}></input>
+                                <input type="text" placeholder="1999" value={yearWr} onChange={(e) => setYearWr(e.target.value)}></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='formDivider'></div>
+                <div className='formBottom'>
+                    <p>Lägg till bild. 1:1 format.</p>
+                    <input type="file" accept="image/*" 
                         onChange={(event) => {
                                     setImageUpload(event.target.files[0])
                                 }}>
-                </input>
-                <p>{toString.percent} uppladdat</p>
-                <button type="submit" onClick={() => {
-                            handleUpload();
-                            }}>
-                    Lägg till
-                </button>
+                    </input>
+                    <button type="submit" onClick={() => {
+                                //handleUpload();
+                                }}>
+                        Förhandsgranska
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
 
 export default Skapa;
-
-            //.on(
-            //        "state_changed",
-            //        (snapshot) => {
-            //            const percent = Math.round(
-            //                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            //            );
-            //            // update progress
-            //            setPercent(percent);
-
-
-                        // progress can be paused and resumed. It also exposes progress updates.
-            // Receives the storage reference and the file to upload.
-            //const uploadTask = uploadBytesResumable(imageRef, imageUpload);
-//
-            //uploadTask.on(
-            //    "state_changed",
-            //    (snapshot) => {
-            //        const percent = Math.round(
-            //            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            //        );
-//
-            //        // update progress
-            //        console.log(percent);
-            //        setPercent(percent);
-            //        console.log(percent);
-            //    },
-            //    (err) => console.log(err),
-            //    () => {
-            //        // download url
-            //        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            //            console.log(url);
-            //            //..ooooch laddar upp alltet
-            //            AddProjekt({ 
-            //                title, 
-            //                body, 
-            //                hook, 
-            //                yarn,
-            //                bought,
-            //                hero: storageUrl,
-            //                id,
-            //                year,
-            //                month,
-            //                day,
-            //                author,
-            //                dateShow: getShowDate()
-            //                });
-            //            setTitle("");
-            //            setBody("");
-            //            setYarn("");
-            //            setBought("");
-                    
-            
-            //uploadBytes(imageRef, imageUpload)
-            //.then((snapshot) => {
-//
-            //        getDownloadURL(snapshot.ref)
-            //        setImageLoad(true)
-            //            .then((url) => {
-            //                setStorageUrl(url);
-            //                setImageLoad(false);
-            //            })
-            //            .catch((error) => {
-            //                alert(error.message);
-            //            })
-            //    })
-            //    .catch((error) => {
-            //        alert(error.message);
-            //    })
-//
-            //    console.log(storageUrl);
-            //    
-            //    setImageLoad(false);
-//
-            //    if (imageLoad){
-            //        return <h2>Laddar upp bild...</h2>
-            //    }
-//
-            //    if(!imageLoad){
-            //        //allt gick bra, nu skicka till firebase
-            //        //..ooooch laddar upp alltet
-            //        AddProjekt({ 
-            //            title, 
-            //            body, 
-            //            hook, 
-            //            yarn,
-            //            bought,
-            //            hero: storageUrl,
-            //            id,
-            //            year,
-            //            month,
-            //            day,
-            //            author,
-            //            dateShow: getShowDate()
-            //            });
-            //        setTitle("");
-            //        setBody("");
-            //        setYarn("");
-            //        setBought("");
-                
