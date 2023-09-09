@@ -9,11 +9,13 @@ import { ref as storageRef,
 
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useAuthState } from "react-firebase-hooks/auth";
+import ReactModal from 'react-modal';
 
 import { auth, db, firebase } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import '../styles/Skapa.css';
+import Preview from '../components/Skapa/Preview';
 
 const Skapa = () => {
 
@@ -21,6 +23,11 @@ const Skapa = () => {
     const history = useHistory();
     const currentUser = auth.currentUser;
     const [name, setName] = useState("");
+
+    //popUp
+    const [isOpen, setIsOpen] = useState(false);
+    const handleOpen = () => setIsOpen(true);
+    const handleClose = () => setIsOpen(false);
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -129,42 +136,6 @@ const Skapa = () => {
             }
         });
     return ( 
-        //<div id="addProjektWrapper">
-        //    <h1>Lägg till ett projekt</h1>
-        //        <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-        //        <textarea placeholder="Beskrivning av projektet" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>
-        //        <input type="text" placeholder="Typ av garn" value={yarn} onChange={(e) => setYarn(e.target.value)} ></input>
-        //        <input type="text" placeholder="Var garnet är köpt" value={bought} onChange={(e) => setBought(e.target.value)} ></input>
-        //        <div className='dateMade'>
-        //            <p>Datum projektet skapades dd-mån-åååå format: </p>
-        //            <input type="text" placeholder="8" value={dayWr} onChange={(e) => setDayWr(e.target.value)}></input>
-        //            <input type="text" placeholder="Feb" value={monthWr} onChange={(e) => setMonthWr(e.target.value)}></input>
-        //            <input type="text" placeholder="1999" value={yearWr} onChange={(e) => setYearWr(e.target.value)}></input>
-        //        </div>
-//
-        //        <select value={name} onChange={(e) => setAuthor(e.target.value)}>
-        //            <option label="Kajsa" value="Kajsa"></option>
-        //            <option label="Lucas" value="Lucas"></option>
-        //            <option label="Matilda" value="Matilda"></option>
-        //        </select>
-        //        <select value={hook} onChange={(e) => setHook(e.target.value)}>
-        //            {hookArr.map((hook) => 
-        //                <option label={`${hook}mm`} value={`${hook}mm`} key={hook}></option>
-        //            )}
-        //        </select>
-        //        
-        //        <input type="file" accept="image/*" 
-        //                onChange={(event) => {
-        //                            setImageUpload(event.target.files[0])
-        //                        }}>
-        //        </input>
-        //        <p>{toString.percent} uppladdat</p>
-        //        <button type="submit" onClick={() => {
-        //                    handleUpload();
-        //                    }}>
-        //            Lägg till
-        //        </button>
-        //</div>
         <div id="SkapaWrapper">
             <h1>Lägg till ett projekt</h1>
             <div className='formContainer'>
@@ -206,10 +177,35 @@ const Skapa = () => {
                                 }}>
                     </input>
                     <button type="submit" onClick={() => {
-                                //handleUpload();
-                                }}>
-                        Förhandsgranska
+                        console.log(title.length);
+                        console.log(dayWr.length);
+                        console.log(monthWr.length);
+                        console.log(yearWr.length);
+                        console.log(bought.length);
+                        console.log(body.length);
+                        console.log(imageUpload);
+
+                        //if(title.length || dayWr.length || monthWr.length || yearWr.length || yarn.length || bought.length || body.length !== 0){
+                        //    alert("Vänligen fyll i alla fält.")
+                        //} else {handleOpen();}
+
+                        handleOpen();
+                    }}
+                        >Förhandsgranska
                     </button>
+                    <Preview 
+                    projectInfo={{
+                                    title:title, 
+                                    body:body,
+                                    dayWr:dayWr, 
+                                    monthWr:monthWr,
+                                    yearWr:yearWr,
+                                    yarn:yarn,
+                                    bought:bought,
+                                    image: imageUpload
+                                
+                                }}
+                    isOpen={isOpen} handleClose={handleClose} />
                 </div>
             </div>
         </div>

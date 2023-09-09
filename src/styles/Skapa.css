@@ -52,3 +52,23 @@ textarea{
     width: 40%;
     align-items: center;
 }
+
+#PreviewWrapper{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(172, 172, 172, 0.28);
+    backdrop-filter: blur(5px);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+}
+
+#ArtWrapper{
+    width: var(--main--page-width);
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+}
