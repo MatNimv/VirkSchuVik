@@ -87,39 +87,15 @@ const Skapa = () => {
         const id = uuidv();
         getDate();
 
-        if (imageUpload === null){
-            alert("Välj en bild tack.");
-            return;
-        } else {
-            const imageRef = storageRef(storage, `/projekt/${id}/${id}`)
+        const imageRef = storageRef(storage, `/projekt/${id}/${id}`)
 
-            const uploadFile = async () => {
-                    const snapshot = await uploadBytes(imageRef, imageUpload);
-                    const url = await getDownloadURL(snapshot.ref);
-                    setStorageUrl(url);
-                    return url;
-                }
-                setStorageUrl(uploadFile);
+        const uploadFile = async () => {
+                const snapshot = await uploadBytes(imageRef, imageUpload);
+                const url = await getDownloadURL(snapshot.ref);
+                setStorageUrl(url);
+                return url;
             }
-
-            //allt gick bra, nu skicka till firebase
-            AddProjekt({ title, 
-                body, 
-                hook, 
-                yarn,
-                bought,
-                hero: storageUrl,
-                id,
-                year: year,
-                month: month,
-                day: day,
-                author,
-                dateShow: getShowDate()
-                });
-            setTitle("");
-            setBody("");
-            setYarn("");
-            setBought("");
+            setStorageUrl(uploadFile);
         }
 
 
@@ -127,7 +103,7 @@ const Skapa = () => {
         const autho = getAuth();
         onAuthStateChanged(autho, (user) => {
             if (user) {
-            console.log(user);
+            //console.log(user);
               // ...
             } else {
                 history.push("/");
@@ -135,10 +111,27 @@ const Skapa = () => {
               // ...
             }
         });
+
     return ( 
+        
         <div id="SkapaWrapper">
+            <Preview 
+            projectInfo={{
+                            title:title, 
+                            body:body,
+                            dayWr:dayWr, 
+                            monthWr:monthWr,
+                            yearWr:yearWr,
+                            yarn:yarn,
+                            bought:bought,
+                            image: storageUrl,
+                            hook: hook,
+                            author: author
+                        }}
+            isOpen={isOpen} handleClose={handleClose} />
             <h1>Lägg till ett projekt</h1>
             <div className='formContainer'>
+
                 <div className='formTop'>
                     <div className='projectInit'>
                         <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
@@ -177,35 +170,15 @@ const Skapa = () => {
                                 }}>
                     </input>
                     <button type="submit" onClick={() => {
-                        console.log(title.length);
-                        console.log(dayWr.length);
-                        console.log(monthWr.length);
-                        console.log(yearWr.length);
-                        console.log(bought.length);
-                        console.log(body.length);
-                        console.log(imageUpload);
-
-                        //if(title.length || dayWr.length || monthWr.length || yearWr.length || yarn.length || bought.length || body.length !== 0){
-                        //    alert("Vänligen fyll i alla fält.")
-                        //} else {handleOpen();}
-
-                        handleOpen();
+                                if (imageUpload === null){
+                                    alert("Välj en bild tack.");
+                                } else {
+                                    handleUpload();
+                                    handleOpen();
+                                }
                     }}
                         >Förhandsgranska
                     </button>
-                    <Preview 
-                    projectInfo={{
-                                    title:title, 
-                                    body:body,
-                                    dayWr:dayWr, 
-                                    monthWr:monthWr,
-                                    yearWr:yearWr,
-                                    yarn:yarn,
-                                    bought:bought,
-                                    image: imageUpload
-                                
-                                }}
-                    isOpen={isOpen} handleClose={handleClose} />
                 </div>
             </div>
         </div>

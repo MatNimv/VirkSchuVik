@@ -1,5 +1,6 @@
 #SkapaWrapper h1{
     text-align: center;
+    margin-top: 15vh;
 }
 
 .formContainer{
@@ -51,24 +52,35 @@ textarea{
     flex-direction: column;
     width: 40%;
     align-items: center;
+    position:relative;
 }
+
+/*PREVIEW*/
 
 #PreviewWrapper{
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 200%;
     background-color: rgba(172, 172, 172, 0.28);
     backdrop-filter: blur(5px);
     display:flex;
     justify-content: center;
     align-items: center;
-    top: 0;
-    right: 0;
+
+    z-index: 10;
 }
 
 #ArtWrapper{
+    margin-top: 25vh;
     width: var(--main--page-width);
     background-color: var(--white);
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 20px 0px;
+}
+
+#ArtWrapper img{
+    width: 50%;
 }

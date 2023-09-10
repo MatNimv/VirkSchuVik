@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { auth, logInWithEmailAndPassword } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import '../styles/Login.css';
 
 const Login = () => {
 
@@ -21,30 +21,34 @@ const Login = () => {
     }, [user, loading])
 
     return ( 
-        <div className="login">
-            <div id="loginWrapper">
-                <input
-                    type="text"
-                    className="login__textBox"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="E-mail Address"
-                />
-                <input
-                    type="password"
-                    className="login__textBox"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                />
-                <button
-                    className="login__btn"
-                    onClick={() => logInWithEmailAndPassword(email, password)}>
-                    Login
-                </button>
-                <div>
-                    <Link to="/reset">Forgot Password</Link>
+        <div id="loginWrapper">
+            <h1>Logga In</h1>
+            <div className="loginInputs">
+                <div className="emailInput">
+                    <p>Din Mejladress</p>
+                    <input
+                        type="text"
+                        className="login__textBox"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Mejladress"
+                    />
                 </div>
+                <div className="passInput">
+                    <p>Ditt Lösenord</p>
+                    <input
+
+                        type="password"
+                        className="login__textBox"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Lösenord"
+                    />
+                </div>
+                <button
+                    onClick={() => logInWithEmailAndPassword(email, password)}>
+                    Logga In
+                </button>
             </div>
         </div>
     );

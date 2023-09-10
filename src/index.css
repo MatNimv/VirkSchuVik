@@ -32,6 +32,12 @@ Quicksand, Lora,
     --shadow-dark: 7px 10px 10px rgba(0,0,0,0.1);
 }
 
+.App{
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 body{
     margin: 0px;
     height:100vh;
@@ -42,17 +48,48 @@ main{
     display:flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;;
+    flex-direction: column;
 }
 
 
 main > div{
     margin-top:25vh;
     display:flex;
+    flex-grow: 1;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
+
+
+/*FOOTER*/
+
+footer{
+    margin-top: 25vh;
+    height: 30vh;
+    width: 100vw;
+    background-color: var(--main-purple);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position:relative;
+    bottom: 0;
+    z-index: 100;
+    overflow:hidden;
+}
+.footerInfo{
+    width: 40vw;
+    margin-left: 2vw;
+}
+.footerLinks{
+    margin-right: 15vw;
+    
+}
+.footerLinks a{
+    color: var(--main-beige);
+}
+
+
 a{text-decoration: none; cursor:pointer;}
 button{cursor:pointer;}
 
@@ -143,29 +180,6 @@ nav > div a{
     position: relative;
     padding-bottom: 5px;
     font-size: larger;
-}
-
-/*FOOTER*/
-
-footer{
-    margin-top: 10vh;
-    height: 30vh;
-    width: 100vw;
-    background-color: var(--main-purple);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.footerInfo{
-    width: 40vw;
-    margin-left: 2vw;
-}
-.footerLinks{
-    margin-right: 15vw;
-    
-}
-.footerLinks a{
-    color: var(--main-beige);
 }
 
 /*NOT FOUND*/
