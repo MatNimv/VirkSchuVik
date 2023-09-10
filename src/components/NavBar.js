@@ -12,6 +12,8 @@ const NavBar = () => {
     const [name, setName] = useState("");
     const currentUser = auth.currentUser;
 
+    const [dropMenu, setDropMenu] = useState(false);
+
     async function fetchUserName() {
         if(currentUser){
             const uid = currentUser.uid;
@@ -25,6 +27,10 @@ const NavBar = () => {
                 alert("Ett fel uppstod när användardatan hämtades. Försök igen.");
             }
         }
+    }
+
+    function handleDropMenu(){
+        setDropMenu(!dropMenu);
     }
 
     //kolla om någon är inloggad eller ej
@@ -65,9 +71,16 @@ const NavBar = () => {
                 <Link to="/omOss">Om Oss</Link>
             </div>
             <div className='userWrapper'>
-                {user && <p>Inloggad som {name}</p>}
-                {user && <button onClick={logout}>Logga ut</button>}
-                {!user && <Link to="/login"><button>Logga in</button></Link>}                  
+            {user && <div className='userChoices' > 
+            <p>Hej, {name}!<button onClick={handleDropMenu}>V</button></p>
+                    {dropMenu ? 
+                    <div className='dropDown'>
+                        <Link to="/Skapa"><p>Skapa ett inlägg</p></Link>
+                        <p onClick={logout}>Logga ut </p> 
+                    </div>
+                        : 
+                    <div></div>}
+                </div> }
             </div>
         </nav>
     );
