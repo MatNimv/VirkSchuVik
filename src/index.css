@@ -105,6 +105,56 @@ nav > div a{
     font-size: larger;
 }
 
+/*USERWRAPPER*/
+nav .userWrapper{
+    width: 30%;
+}
+nav .userChoices:first-child{
+    color: var(--main-beige);
+}
+nav .userChoices button {
+    margin-left: 10px;
+}
+nav .dropDown{
+    border-bottom: 20px;
+    position:absolute;
+    bottom: -95px;
+    right: 165px;
+    background-color: var(--main-beige);
+    width:11%;
+}
+
+nav .dropDown a{
+    width:100%;
+    display:block;
+    border-bottom: 0px;
+}
+nav .dropDown a,
+nav .dropDown p{
+    font-size: medium;
+    color: var(--main-purple);
+}
+
+nav .dropDown p{
+    transition: all 0.2s ease-in;
+}
+
+nav .userWrapper :last-child{
+    cursor: pointer;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+nav .dropDown a:hover,
+nav .dropDown p:hover{
+    background-color: var(--main-purple);
+    color: var(--main-beige);
+}
+nav .dropDown p{
+    margin: 0px;
+    padding: 10px 0px 10px 15px;
+}
+
+
 /*FOOTER*/
 
 footer{
