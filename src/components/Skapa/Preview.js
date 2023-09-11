@@ -1,17 +1,23 @@
+import parse from 'html-react-parser';
+import React from 'react';
+
+
 const Preview = ({projectInfo, isOpen, handleClose}) => {
 
     if (!isOpen) {
         return null;
     }
 
+    const body = parse(projectInfo.body);
+
     return ( 
         <div id="PreviewWrapper">
             <div id="ArtWrapper">
                 <h1>{projectInfo.title}</h1>
+                <p>Av {projectInfo.author}</p>
                 <p>{`${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`}</p>
-                <p></p>
                 <img src={projectInfo.image} alt={projectInfo.title}></img>
-                <p>{projectInfo.body}</p>
+                <div>{body}</div>
                 <div className='projektGadgets'>
                     <ul>
                         <li>Typ av garn: {projectInfo.yarn}</li>

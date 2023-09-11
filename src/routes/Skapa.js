@@ -1,5 +1,5 @@
 import AddProjekt from '../functions/AddProjekt';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {v4 as uuidv} from 'uuid';
 import { storage } from "../firebase";
 import { ref as storageRef, 
@@ -16,6 +16,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import '../styles/Skapa.css';
 import Preview from '../components/Skapa/Preview';
+import { Editor } from "@tinymce/tinymce-react"; //1. Import TinyMCE Editor
 
 const Skapa = () => {
 
@@ -48,12 +49,13 @@ const Skapa = () => {
     const [storageUrl, setStorageUrl] = useState("");
     const [imageUpload, setImageUpload] = useState(null);
 
-    //detta ska göras om till en komponent
-    async function fetchUserName() {
-        const uid = currentUser.uid;
+    //editorn
+    const editorRef = useRef(null);
 
+    //detta ska göras om till en komponent
+    async function fetchUserName(userUID) {
         try {
-            const q = query(collection(db, "people"), where("id", "==", uid));
+            const q = query(collection(db, "people"), where("id", "==", userUID));
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
             setName(data.fname);
@@ -104,43 +106,33 @@ const Skapa = () => {
         const autho = getAuth();
         onAuthStateChanged(autho, (user) => {
             if (user) {
-            //console.log(user);
-              // ...
+                fetchUserName(user.uid);
             } else {
                 history.push("/");
               // User is signed out
-              // ...
             }
         });
 
         const previewOpen = () => {
+            //kontrollerar preview om den ska öppnas eller ej
+            //därmed ändras ett par element
             setIsOpen((isOpen) => {
-                console.log(isOpen);
                 if(!isOpen){
                     document.querySelector("main").style.backgroundColor = "white";
-                    document.querySelector("main").style.height = "120vh";
+                    document.querySelector("main").style.height = "149vh";
+                    document.querySelector("footer").style.marginTop = "25vh";
                     return false;
                 } else {
-
                     document.querySelector("main").style.height = "250vh";
                     document.querySelector("footer").style.marginTop = "0px";
-                    //document.querySelector(".App").style.backgroundColor = "none";
                     document.querySelector("main").style.backgroundColor = "rgba(172, 172, 172, 0.28)";
-                    
-
                     return true;
-
-                    
-                    
                 }
             })
         }
 
-
-
         useEffect(() => { 
             window.addEventListener("click", previewOpen);
-//
         }, [isOpen])
 
     return ( 
@@ -165,8 +157,38 @@ const Skapa = () => {
 
                 <div className='formTop'>
                     <div className='projectInit'>
+                        
                         <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-                        <textarea placeholder="Beskrivning av projektet" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>
+                        <div id="EditorWrapper">
+                            <Editor
+                                tinymceScriptSrc={process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"}
+                                apiKey="your-api-key"
+                                id="content"
+                                value={body}
+                                onChange={(e) => setBody(e.target.value)}
+                                onInit={(evt, editor) => editorRef.current = editor}
+                                init={{
+                                    height: 300,
+                                    plugins: [
+                                    "a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
+                                    ],
+                                    toolbar:
+                                    "undo redo | blocks fontsize | bold italic underline | removeformat | link ",
+                                    menubar: false,
+                                    block_formats: "Paragraph=p; Header 3=h3",
+                                    content_style: `
+                                        body {
+                                            font-family: Arial, sans-serif;
+                                            margin: 12px;
+                                        }
+                                        h1, h2, h3, p {
+                                            color: #08080d;
+                                            margin: 10px;
+                                        }
+                                        `,
+                                }}
+                            />
+                        </div>
                         <select value={name} onChange={(e) => setAuthor(e.target.value)}>
                             <option label="Kajsa" value="Kajsa"></option>
                             <option label="Lucas" value="Lucas"></option>
@@ -203,14 +225,12 @@ const Skapa = () => {
                     <button type="submit" onClick={() => {
                                 if (imageUpload === null){
                                     alert("Välj en bild tack.");
-                                    console.log("ingen bild");
-                                    console.log(isOpen);
-                                    setIsOpen(false);
                                 } else {
-                                    console.log("bild");
-                                    console.log(isOpen);
+                                    if (editorRef.current) {
+                                        console.log(typeof(editorRef.current.getContent()));
+                                        setBody(editorRef.current.getContent())
+                                    }
                                     handleUpload();
-                                    setIsOpen(true);
                                     handleOpen();
                                 }
                     }}
@@ -223,3 +243,5 @@ const Skapa = () => {
 }
 
 export default Skapa;
+
+//<textarea placeholder="Beskrivning av projektet" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>
