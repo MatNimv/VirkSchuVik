@@ -162,20 +162,15 @@ const Skapa = () => {
                         <div id="EditorWrapper">
                             <Editor
                                 tinymceScriptSrc={process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"}
-                                apiKey="your-api-key"
-                                id="content"
-                                value={body}
                                 onChange={(e) => setBody(e.target.value)}
+                                value={body}
                                 onInit={(evt, editor) => editorRef.current = editor}
                                 init={{
                                     height: 300,
-                                    plugins: [
-                                    "a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
-                                    ],
                                     toolbar:
                                     "undo redo | blocks fontsize | bold italic underline | removeformat | link ",
                                     menubar: false,
-                                    block_formats: "Paragraph=p; Header 3=h3",
+                                    block_formats: "Paragraph=p; Header 1=h3",
                                     content_style: `
                                         body {
                                             font-family: Arial, sans-serif;
@@ -189,7 +184,7 @@ const Skapa = () => {
                                 }}
                             />
                         </div>
-                        <select value={name} onChange={(e) => setAuthor(e.target.value)}>
+                        <select value={author} onChange={(e) => setAuthor(e.target.value)}>
                             <option label="Kajsa" value="Kajsa"></option>
                             <option label="Lucas" value="Lucas"></option>
                             <option label="Matilda" value="Matilda"></option>
@@ -227,7 +222,6 @@ const Skapa = () => {
                                     alert("Välj en bild tack.");
                                 } else {
                                     if (editorRef.current) {
-                                        console.log(typeof(editorRef.current.getContent()));
                                         setBody(editorRef.current.getContent())
                                     }
                                     handleUpload();

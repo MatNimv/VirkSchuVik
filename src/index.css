@@ -26,6 +26,7 @@ Quicksand, Lora,
     --main-margin: 50px;
     --main-border-radius: 20px;
     --main-border-radius-s: 5px;
+    --input-margin: 20px;
 
     /*MISC*/
     --shadow-light: 1px 3px 5px rgba(0,0,0,0.1);
@@ -114,7 +115,7 @@ select, textarea {
 }
 
 input, textarea{
-    margin-bottom: 20px;
+    margin-bottom: var(--input-margin);
 }
 
 input:focus,
