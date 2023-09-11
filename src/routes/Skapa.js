@@ -1,5 +1,5 @@
 import AddProjekt from '../functions/AddProjekt';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {v4 as uuidv} from 'uuid';
 import { storage } from "../firebase";
 import { ref as storageRef, 
@@ -13,6 +13,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, firebase } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import '../styles/Skapa.css';
+import Preview from '../components/Skapa/Preview';
+import { Editor } from "@tinymce/tinymce-react"; //1. Import TinyMCE Editor
 
 const Skapa = () => {
 
@@ -20,6 +23,12 @@ const Skapa = () => {
     const history = useHistory();
     const currentUser = auth.currentUser;
     const [name, setName] = useState("");
+
+    //popUp
+    const [isOpen, setIsOpen] = useState(false);
+    const handleOpen = () => setIsOpen(true);
+    const handleClose = () => setIsOpen(false);
+    const [isShrunk, setShrunk] = useState(false);
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -39,12 +48,13 @@ const Skapa = () => {
     const [storageUrl, setStorageUrl] = useState("");
     const [imageUpload, setImageUpload] = useState(null);
 
-    //detta ska göras om till en komponent
-    async function fetchUserName() {
-        const uid = currentUser.uid;
+    //editorn
+    const editorRef = useRef(null);
 
+    //detta ska göras om till en komponent
+    async function fetchUserName(userUID) {
         try {
-            const q = query(collection(db, "people"), where("id", "==", uid));
+            const q = query(collection(db, "people"), where("id", "==", userUID));
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
             setName(data.fname);
@@ -79,110 +89,152 @@ const Skapa = () => {
         const id = uuidv();
         getDate();
 
-        if (imageUpload === null){
-            alert("Välj en bild tack.");
-            return;
-        } else {
-            const imageRef = storageRef(storage, `/projekt/${id}/${id}`)
+        const imageRef = storageRef(storage, `/projekt/${id}/${id}`)
 
-            const uploadFile = async () => {
-                    const snapshot = await uploadBytes(imageRef, imageUpload);
-                    const url = await getDownloadURL(snapshot.ref);
-                    setStorageUrl(url);
-                    return url;
-                }
-                setStorageUrl(uploadFile);
+        const uploadFile = async () => {
+                const snapshot = await uploadBytes(imageRef, imageUpload);
+                const url = await getDownloadURL(snapshot.ref);
+                setStorageUrl(url);
+                return url;
             }
-
-            //allt gick bra, nu skicka till firebase
-            AddProjekt({ title, 
-                body, 
-                hook, 
-                yarn,
-                bought,
-                hero: storageUrl,
-                id,
-                year: year,
-                month: month,
-                day: day,
-                author,
-                dateShow: getShowDate()
-                });
-            setTitle("");
-            setBody("");
-            setYarn("");
-            setBought("");
+            setStorageUrl(uploadFile);
         }
 
 
         //kolla om någon är inloggad eller ej
-        //if(currentUser !== null){
-        //    fetchUserName()
-        //} else {
-        //    //inget. får inte vara här
-        //    setTimeout(() => {
-        //        history.push("/");
-        //    }, 1000);
-        //    
-        //}
         const autho = getAuth();
         onAuthStateChanged(autho, (user) => {
             if (user) {
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/firebase.User
-              const uid = user.uid;
-              console.log(user);
-              // ...
+                fetchUserName(user.uid);
             } else {
                 history.push("/");
               // User is signed out
-              // ...
             }
-          });
+        });
 
-        //useEffect(() => {
-        //    fetchUserName()
-        //}, [name]);
-//
+        const previewOpen = () => {
+            //kontrollerar preview om den ska öppnas eller ej
+            //därmed ändras ett par element
+            setIsOpen((isOpen) => {
+                if(!isOpen){
+                    document.querySelector("main").style.backgroundColor = "white";
+                    document.querySelector("main").style.height = "149vh";
+                    document.querySelector("footer").style.marginTop = "25vh";
+                    return false;
+                } else {
+                    document.querySelector("main").style.height = "250vh";
+                    document.querySelector("footer").style.marginTop = "0px";
+                    document.querySelector("main").style.backgroundColor = "rgba(172, 172, 172, 0.28)";
+                    return true;
+                }
+            })
+        }
+
+        useEffect(() => { 
+            window.addEventListener("click", previewOpen);
+        }, [isOpen])
 
     return ( 
-        <div id="addProjektWrapper">
+        
+        <div id="SkapaWrapper" className="">
+            <Preview className={`openIs${isOpen.toString()}`}
+            projectInfo={{
+                            title:title, 
+                            body:body,
+                            dayWr:dayWr, 
+                            monthWr:monthWr,
+                            yearWr:yearWr,
+                            yarn:yarn,
+                            bought:bought,
+                            image: storageUrl,
+                            hook: hook,
+                            author: author
+                        }}
+            isOpen={isOpen} handleClose={handleClose} />
             <h1>Lägg till ett projekt</h1>
-                <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-                <textarea placeholder="Beskrivning av projektet" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>
-                <input type="text" placeholder="Typ av garn" value={yarn} onChange={(e) => setYarn(e.target.value)} ></input>
-                <input type="text" placeholder="Var garnet är köpt" value={bought} onChange={(e) => setBought(e.target.value)} ></input>
-                <div className='dateMade'>
-                    <p>Datum projektet skapades dd-mån-åååå format: </p>
-                    <input type="text" placeholder="8" value={dayWr} onChange={(e) => setDayWr(e.target.value)}></input>
-                    <input type="text" placeholder="Feb" value={monthWr} onChange={(e) => setMonthWr(e.target.value)}></input>
-                    <input type="text" placeholder="1999" value={yearWr} onChange={(e) => setYearWr(e.target.value)}></input>
-                </div>
+            <div className='formContainer'>
 
-                <select value={name} onChange={(e) => setAuthor(e.target.value)}>
-                    <option label="Kajsa" value="Kajsa"></option>
-                    <option label="Lucas" value="Lucas"></option>
-                    <option label="Matilda" value="Matilda"></option>
-                </select>
-                <select value={hook} onChange={(e) => setHook(e.target.value)}>
-                    {hookArr.map((hook) => 
-                        <option label={`${hook}mm`} value={`${hook}mm`} key={hook}></option>
-                    )}
-                </select>
-                
-                <input type="file" accept="image/*" 
+                <div className='formTop'>
+                    <div className='projectInit'>
+                        
+                        <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+                        <div id="EditorWrapper">
+                            <Editor
+                                tinymceScriptSrc={process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"}
+                                onChange={(e) => setBody(e.target.value)}
+                                value={body}
+                                onInit={(evt, editor) => editorRef.current = editor}
+                                init={{
+                                    height: 300,
+                                    toolbar:
+                                    "undo redo | blocks fontsize | bold italic underline | removeformat | link ",
+                                    menubar: false,
+                                    block_formats: "Paragraph=p; Header 1=h3",
+                                    content_style: `
+                                        body {
+                                            font-family: Arial, sans-serif;
+                                            margin: 12px;
+                                        }
+                                        h1, h2, h3, p {
+                                            color: #08080d;
+                                            margin: 10px;
+                                        }
+                                        `,
+                                }}
+                            />
+                        </div>
+                        <select value={author} onChange={(e) => setAuthor(e.target.value)}>
+                            <option label="Kajsa" value="Kajsa"></option>
+                            <option label="Lucas" value="Lucas"></option>
+                            <option label="Matilda" value="Matilda"></option>
+                        </select>
+                    </div>
+                    <div className='middleSpace'></div>
+                    <div className='projectGadgets'>
+                    <input type="text" placeholder="Typ av garn" value={yarn} onChange={(e) => setYarn(e.target.value)} ></input>
+                        <input type="text" placeholder="Var garnet är köpt" value={bought} onChange={(e) => setBought(e.target.value)} ></input>
+                        <select value={hook} onChange={(e) => setHook(e.target.value)}>
+                            {hookArr.map((hook) => 
+                                <option label={`${hook}mm`} value={`${hook}mm`} key={hook}></option>
+                            )}
+                        </select>
+                        <div className='dateMade'>
+                            <p>Datum projektet skapades dd-mån-åååå format: </p>
+                            <div className='dates'>
+                                <input type="text" placeholder="8" value={dayWr} onChange={(e) => setDayWr(e.target.value)}></input>
+                                <input type="text" placeholder="Feb" value={monthWr} onChange={(e) => setMonthWr(e.target.value)}></input>
+                                <input type="text" placeholder="1999" value={yearWr} onChange={(e) => setYearWr(e.target.value)}></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='formDivider'></div>
+                <div className='formBottom'>
+                    <p>Lägg till bild. 1:1 format.</p>
+                    <input type="file" accept="image/*" 
                         onChange={(event) => {
                                     setImageUpload(event.target.files[0])
                                 }}>
-                </input>
-                <p>{toString.percent} uppladdat</p>
-                <button type="submit" onClick={() => {
-                            handleUpload();
-                            }}>
-                    Lägg till
-                </button>
+                    </input>
+                    <button type="submit" onClick={() => {
+                                if (imageUpload === null){
+                                    alert("Välj en bild tack.");
+                                } else {
+                                    if (editorRef.current) {
+                                        setBody(editorRef.current.getContent())
+                                    }
+                                    handleUpload();
+                                    handleOpen();
+                                }
+                    }}
+                        >Förhandsgranska
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
 
 export default Skapa;
+
+//<textarea placeholder="Beskrivning av projektet" value={body} onChange={(e) => setBody(e.target.value)} ></textarea>

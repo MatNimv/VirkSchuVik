@@ -60,7 +60,7 @@ const ProjektArt = () => {
                     <img src={pro.hero} alt={pro.title}></img>
                     <p>{pro.body}</p>
                 </div>
-                <div className='projektInfo'>
+                <div className='projektGadgets'>
                     <ul>
                         <li>Typ av garn: {pro.yarn}</li>
                         <li>Garn köpt: {pro.bought}</li>
