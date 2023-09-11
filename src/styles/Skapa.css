@@ -60,13 +60,12 @@ textarea{
 #PreviewWrapper{
     position: absolute;
     width: 100vw;
-    height: 200%;
-    background-color: rgba(172, 172, 172, 0.28);
+    height: 250vh;
     backdrop-filter: blur(5px);
     display:flex;
     justify-content: center;
     align-items: center;
-
+    top: -50vh;
     z-index: 10;
 }
 
@@ -78,9 +77,36 @@ textarea{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0px 0px 20px 0px;
+    padding: 0px 0px 50px 0px;
+    border-radius: var(--main-border-radius);
 }
 
 #ArtWrapper img{
     width: 50%;
+    border-radius: 10px;
+}
+
+#ArtWrapper .buttonContainer{
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#ArtWrapper .edit{
+    color: var(--accent-purple);
+    border-color: var(--accent-purple);
+}
+#ArtWrapper .edit:hover{
+    color: black;
+    background-color: var(--accent-purple);
+}
+
+.openIstrue{
+    height: 250vh;
+}
+main #SkapaWrapper .openIstrue{margin-top:0px;}
+.openIsfalse{
+    height: 100vh;
 }

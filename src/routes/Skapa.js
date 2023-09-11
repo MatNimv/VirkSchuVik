@@ -28,6 +28,7 @@ const Skapa = () => {
     const [isOpen, setIsOpen] = useState(false);
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
+    const [isShrunk, setShrunk] = useState(false);
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -112,10 +113,40 @@ const Skapa = () => {
             }
         });
 
+        const previewOpen = () => {
+            setIsOpen((isOpen) => {
+                console.log(isOpen);
+                if(!isOpen){
+                    document.querySelector("main").style.backgroundColor = "white";
+                    document.querySelector("main").style.height = "120vh";
+                    return false;
+                } else {
+
+                    document.querySelector("main").style.height = "250vh";
+                    document.querySelector("footer").style.marginTop = "0px";
+                    //document.querySelector(".App").style.backgroundColor = "none";
+                    document.querySelector("main").style.backgroundColor = "rgba(172, 172, 172, 0.28)";
+                    
+
+                    return true;
+
+                    
+                    
+                }
+            })
+        }
+
+
+
+        useEffect(() => { 
+            window.addEventListener("click", previewOpen);
+//
+        }, [isOpen])
+
     return ( 
         
-        <div id="SkapaWrapper">
-            <Preview 
+        <div id="SkapaWrapper" className="">
+            <Preview className={`openIs${isOpen.toString()}`}
             projectInfo={{
                             title:title, 
                             body:body,
@@ -172,8 +203,14 @@ const Skapa = () => {
                     <button type="submit" onClick={() => {
                                 if (imageUpload === null){
                                     alert("Välj en bild tack.");
+                                    console.log("ingen bild");
+                                    console.log(isOpen);
+                                    setIsOpen(false);
                                 } else {
+                                    console.log("bild");
+                                    console.log(isOpen);
                                     handleUpload();
+                                    setIsOpen(true);
                                     handleOpen();
                                 }
                     }}

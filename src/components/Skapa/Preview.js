@@ -20,8 +20,8 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
                     </ul>
                 </div>
                 <div className="buttonContainer">
-                    <button onClick={handleClose}>Fortsätt redigera</button>
-                    <button onClick={handleClose}>Ladda upp</button>
+                    <button className="edit" onClick={handleClose}>Fortsätt redigera</button>
+                    <button className="upload" onClick={handleClose}>Ladda upp</button>
                 </div>
 
             </div>
