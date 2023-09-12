@@ -1,77 +1,76 @@
 import { useState } from 'react';
-import firebase from '../../firebase';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import '../../styles/projekt.css';
-import GetDocument from '../../functions/getDocument';
-
-//här ska bara en projektartikel visas. 
-//återstår hur jag löser det med länkar.
+import { query, collection, getDocs, where } from "firebase/firestore";
+import { db } from "../../firebase";
+import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 const ProjektArt = () => {
 
     const [projekt, setProjekt] = useState([]);
-
+    const [loading, setLoading] = useState(true);
     const {id} = useParams();
 
-    console.log(id);
-    //const {data: projekts, error, loading} = GetDocument("projekt", "id", id);
+    //denna ska mha id hämta 1 projekt
+    async function fetchIdProjekt() {
+            try {
+                const q = query(collection(db, "projekt"), where("id", "==", id));
+                const doc = await getDocs(q);
+                const data = doc.docs[0].data();
+                setProjekt(data);
+                console.log(data);
+                setLoading(false);
+            } catch (err) {
+                alert("Ett fel uppstod när projektet hämtades. Försök igen.");
+            }
+        }
 
-    //console.log(projekts);
+    //async function fetchAuthorProjekt() {
+    //        try {
+    //            const q = query(collection(db, "people"), where("fname", "==", author));
+    //            const doc = await getDocs(q);
+    //            const data = doc.docs[0].data();
+    //            setProjekt(data);
+    //            console.log(data);
+    //        } catch (err) {
+    //            alert("Ett fel uppstod när projektet hämtades. Försök igen.");
+    //        }
+    //    }
 
+    useEffect(() => {
+        if(id){fetchIdProjekt()};
+        //if(author){fetchAuthorProjekt()};
+    }, [id])
 
-//denna ska hämta ID av dokumentet, inte alla
-    
-    const ref = firebase.firestore().collection("projekt");
-
-    //function getProjekt() {
-    //    setLoading(true);
-    //    ref.onSnapshot((QuerySnapshot) => {
-    //        const items = [];
-    //        QuerySnapshot.forEach((doc) => {
-    //            items.push(doc.data());
-    //        });
-    //        setProjekt(items);
-    //        setLoading(false);
-    //    });
-//
-    //}
-//
-    //useEffect(() => {
-    //    getProjekt();
-    //}, [])
-
-   //if (loading){
-   //    return <h2>Laddar in projekt...</h2>
-   //}
-   //if(error){
-   //    return <h2>Gick inte att ladda in.</h2>
-   //}
-
+    if (loading){
+        return <h2>Laddar in projekt...</h2>
+    }
 
     return ( 
         <div id="projektArtWrapper">
-        {projekt.map((pro) => (
-            <div className="projekt" key={pro.id}>
-                <div className='oneProjektArtWrapper'>
-                    <h2>{pro.title}</h2>
-                    <p>av {pro.author}</p>
-                    <p>{pro.date}</p>
-                    <img src={pro.hero} alt={pro.title}></img>
-                    <p>{pro.body}</p>
+            <div className='oneProjektArtWrapper'>
+                <div className='upperInfo'>
+                        <h1>{projekt.title}</h1>
+                        <p>av <Link to={`/projekt/${projekt.author}`}>{projekt.author}</Link></p>
+                        <p>{projekt.dateShow}</p>
                 </div>
-                <div className='projektGadgets'>
+                <img src={projekt.hero} alt={projekt.title}></img>
+                <div className='textBody'>{parse(projekt.body)}</div>
+            </div>
+            <div className='projektGadgets'>
+                <h3>Fun Facts:</h3>
+                <div className='factsBox'>
                     <ul>
-                        <li>Typ av garn: {pro.yarn}</li>
-                        <li>Garn köpt: {pro.bought}</li>
-                        <li>Storlek på hook: {pro.hook}mm</li>
+                        <li><div className='listPic'></div><span className='bold'>Typ av garn :</span>{projekt.yarn}</li>
+                        <li><div className='listPic'></div><span className='bold'>Garn köpt: </span>{projekt.bought}</li>
+                        <li><div className='listPic'></div><span className='bold'>Storlek på hook: </span>{projekt.hook}</li>
                     </ul>
                 </div>
             </div>
-            ))}
-            
         </div>
     );
 }
- 
+
 export default ProjektArt;

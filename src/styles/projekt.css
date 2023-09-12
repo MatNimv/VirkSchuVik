@@ -93,7 +93,67 @@
 /*EN INKLICKAD ARTIKEL */
 #projektArtWrapper{
     width: var(--main--page-width);
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 50px 0px;
+    border-radius: var(--main-border-radius);
 }
-#projektArtWrapper img{
-    width: 100%;
+.oneProjektArtWrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.oneProjektArtWrapper .upperInfo{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.upperInfo a{
+    color: var(--main-purple);
+    transition: color .1s ease-in;
+}
+.upperInfo a:hover{
+    color: var(--accent-purple);
+    cursor: pointer;
+}
+
+.oneProjektArtWrapper img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    border-radius: var(--main-border-radius);
+}
+
+.oneProjektArtWrapper .textBody{
+    width:70%;
+}
+
+.oneProjektArtWrapper .projektGadgets{
+    margin-top: var(--main-margin);
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.oneProjektArtWrapper.factsBox li{
+    list-style: none;
+    position: relative;
+    bottom: 5px;
+}
+
+.factsBox li{
+    list-style: none;
+    position: relative;
+    bottom: 5px;
+}
+.factsBox{
+    /*line-break: 1px; vet inte hur denna funkar*/
+    background-color: var(--main-green);
+    padding: 5px 30px 5px 0px;
+    border-radius: var(--main-border-radius);
 }

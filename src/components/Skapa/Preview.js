@@ -1,58 +1,114 @@
 import parse from 'html-react-parser';
 import React from 'react';
+import AddProjekt from '../../functions/AddProjekt';
+import { useState } from "react";
+import purple_wool from '../../media/purple_wool.png'
 
 
 const Preview = ({projectInfo, isOpen, handleClose}) => {
+
+    const [year, setYear] = useState(0);
+    const [month, setMonth] = useState(0);
+    const [day, setDay] = useState(0);
 
     if (!isOpen) {
         return null;
     }
 
-    const body = parse(projectInfo.body);
+    console.log(projectInfo);
+
+    function getShowDate(){ //skriver ut datumet finare i projektet
+        return `${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`;
+    }
+
+    //för databasen att sortera enligt datum
+    function getDate(){ 
+        let newDate = new Date()
+        let day = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+
+        let strday = day.toString()
+        let strmonth = month.toString();
+        let stryear = year.toString();
+
+        setDay(strday);
+        setMonth(strmonth);
+        setYear(stryear);
+    }
+
+    const handleUpload = () => {
+        getDate()
+        //allt gick bra, nu skicka till firebase
+        AddProjekt({ 
+            title: projectInfo.title, 
+            body: projectInfo.body, 
+            hook: projectInfo.hook, 
+            yarn: projectInfo.yarn,
+            bought: projectInfo.bought,
+            hero: projectInfo.image,
+            id: projectInfo.id,
+            year: year,
+            month: month,
+            day: day,
+            author: projectInfo.author,
+            dateShow: getShowDate()
+        });
+    }
 
     return ( 
         <div id="PreviewWrapper">
             <div id="ArtWrapper">
-                <h1>{projectInfo.title}</h1>
-                <p>Av {projectInfo.author}</p>
-                <p>{`${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`}</p>
+                <div className='upperInfo'>
+                    <h1>{projectInfo.title}</h1>
+                    <p>Av <span className='highlightAuthor'>{projectInfo.author}</span></p>
+                    <p>{`${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`}</p>
+                </div>
                 <img src={projectInfo.image} alt={projectInfo.title}></img>
-                <div>{body}</div>
+                <div className='textBody'>{parse(projectInfo.body)}</div>
                 <div className='projektGadgets'>
-                    <ul>
-                        <li>Typ av garn: {projectInfo.yarn}</li>
-                        <li>Garn köpt: {projectInfo.bought}</li>
-                        <li>Storlek på hook: {projectInfo.hook}</li>
-                    </ul>
+                <h3>Fun Facts:</h3>
+                    <div className='factsBox'>
+                        <ul>
+                            <li><div className='listPic'></div><span className='bold'>Typ av garn :</span>{projectInfo.yarn}</li>
+                            <li><div className='listPic'></div><span className='bold'>Garn köpt: </span>{projectInfo.bought}</li>
+                            <li><div className='listPic'></div><span className='bold'>Storlek på hook: </span>{projectInfo.hook}</li>
+                        </ul>
+                    </div>
                 </div>
                 <div className="buttonContainer">
                     <button className="edit" onClick={handleClose}>Fortsätt redigera</button>
-                    <button className="upload" onClick={handleClose}>Ladda upp</button>
+                    <button className="upload" onClick={() => {
+                        handleClose()
+                        handleUpload()
+                    }}>Ladda upp</button>
                 </div>
-
             </div>
-
         </div>
     );
 }
 
 export default Preview;
 
-            ////allt gick bra, nu skicka till firebase
-            //AddProjekt({ title, 
-            //    body, 
-            //    hook, 
-            //    yarn,
-            //    bought,
-            //    hero: storageUrl,
-            //    id,
-            //    year: year,
-            //    month: month,
-            //    day: day,
-            //    author,
-            //    dateShow: getShowDate()
-            //    });
-            //setTitle("");
-            //setBody("");
-            //setYarn("");
-            //setBought("");
+
+//<div id="projektArtWrapper">
+//<div className='oneProjektArtWrapper'>
+//    <div className='upperInfo'>
+//            <h1>{projekt.title}</h1>
+//            <p>av <Link to={`/projekt/${projekt.author}`}>{projekt.author}</Link></p>
+//            <p>{projekt.dateShow}</p>
+//    </div>
+//    <img src={projekt.hero} alt={projekt.title}></img>
+//    <div className='textBody'>{parse(projekt.body)}</div>
+//</div>
+//<div className='projektGadgets'>
+//    <h3>Fun Facts:</h3>
+//    <div className='factsBox'>
+//        <ul>
+//            <li><span className='bold'>Typ av garn: </span>{projekt.yarn}</li>
+//            <li><span className='bold'>Garn köpt: </span>{projekt.bought}</li>
+//            <li><span className='bold'>Storlek på hook: </span>{projekt.hook}</li>
+//        </ul>
+//    </div>
+//</div>
+//</div>

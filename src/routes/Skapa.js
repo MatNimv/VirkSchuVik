@@ -1,4 +1,3 @@
-import AddProjekt from '../functions/AddProjekt';
 import { useEffect, useState, useRef } from "react";
 import {v4 as uuidv} from 'uuid';
 import { storage } from "../firebase";
@@ -39,9 +38,7 @@ const Skapa = () => {
     const [yearWr, setYearWr] = useState("");
     const [monthWr, setMonthWr] = useState("");
     const [dayWr, setDayWr] = useState("");
-    const [year, setYear] = useState(0);
-    const [month, setMonth] = useState(0);
-    const [day, setDay] = useState(0);
+    const [generatedID, setGeneratedID] = useState("");
 
     //bild
     const [percent, setPercent] = useState(0);
@@ -65,29 +62,10 @@ const Skapa = () => {
 
     let hookArr = ["1", "2", "2,5", "3", "3,5", "4", "4,5", "5", "6", "7", "8", "9", "10"]
 
-    function getDate(){ //för databasen att sortera enligt datum
-        let newDate = new Date()
-        let day = newDate.getDate();
-        let month = newDate.getMonth() + 1;
-        let year = newDate.getFullYear();
-
-        let strday = day.toString()
-        let strmonth = month.toString();
-        let stryear = year.toString();
-
-        setDay(strday);
-        setMonth(strmonth);
-        setYear(stryear);
-    }
-
-    function getShowDate(){ //skriver ut datumet finare i projektet
-        return `${dayWr} ${monthWr} ${yearWr}`;
-    }
-
     const handleUpload = () => {
         //genererat id
         const id = uuidv();
-        getDate();
+        setGeneratedID(id);
 
         const imageRef = storageRef(storage, `/projekt/${id}/${id}`)
 
@@ -118,8 +96,8 @@ const Skapa = () => {
             setIsOpen((isOpen) => {
                 if(!isOpen){
                     document.querySelector("main").style.backgroundColor = "white";
-                    document.querySelector("main").style.height = "149vh";
-                    document.querySelector("footer").style.marginTop = "25vh";
+                    document.querySelector("main").style.height = "auto";
+                    document.querySelector("footer").style.marginTop = "20vh";
                     return false;
                 } else {
                     document.querySelector("main").style.height = "250vh";
@@ -148,7 +126,8 @@ const Skapa = () => {
                             bought:bought,
                             image: storageUrl,
                             hook: hook,
-                            author: author
+                            author: author,
+                            id: generatedID
                         }}
             isOpen={isOpen} handleClose={handleClose} />
             <h1>Lägg till ett projekt</h1>

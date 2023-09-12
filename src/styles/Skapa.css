@@ -75,7 +75,7 @@
 }
 
 #ArtWrapper{
-    margin-top: 25vh;
+    margin-top: 80vh;
     width: var(--main--page-width);
     background-color: var(--white);
     display: flex;
@@ -86,11 +86,50 @@
     border-radius: var(--main-border-radius);
 }
 
+#ArtWrapper .highlightAuthor{
+    color: var(--main-purple);
+    transition: color .1s ease-in;
+}
+
+#ArtWrapper .highlightAuthor:hover{
+    color: var(--accent-purple);
+    cursor: pointer;
+}
+
 #ArtWrapper img{
     width: 50%;
     border-radius: 10px;
 }
 
+#ArtWrapper .textBody{
+    width: 40%;
+}
+
+#ArtWrapper .projektGadgets{
+    margin: var(--main-margin) 0px var(--main-margin) 0px;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.factsBox li{
+    list-style: none;
+    position: relative;
+    bottom: 5px;
+}
+
+.factsBox .listPic{
+    background-image: url("../media/purple_wool.png");
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: left center;
+    display: inline-block;
+    height:25px;
+    width:25px;
+    margin-right: 10px;
+    position: relative;
+    bottom:-6px;
+}
 #ArtWrapper .buttonContainer{
     display: flex;
     flex-direction: row;
@@ -98,6 +137,7 @@
     justify-content: space-around;
     margin-top: 20px;
 }
+
 
 #ArtWrapper .edit{
     color: var(--accent-purple);
@@ -108,6 +148,8 @@
     background-color: var(--accent-purple);
 }
 
+
+
 .openIstrue{
     height: 250vh;
 }
@@ -115,3 +157,8 @@ main #SkapaWrapper .openIstrue{margin-top:0px;}
 .openIsfalse{
     height: 100vh;
 }
+
+#EditorWrapper .tox-sidebar-wrap{
+    background-color: var(--input-bgc);
+}
+

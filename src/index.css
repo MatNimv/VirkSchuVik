@@ -14,6 +14,7 @@ Quicksand, Lora,
     --main-green: #B5FF9E;
     --accent-green: #77B664;
     --main-white: white;
+    --input-bgc: #f9f9f9;
 
     --white: white;
 
@@ -66,7 +67,7 @@ main > div{
 /*FOOTER*/
 
 footer{
-    margin-top: 25vh;
+    margin-top: 20vh;
     height: 30vh;
     width: 100vw;
     background-color: var(--main-purple);
@@ -88,57 +89,6 @@ footer{
 }
 .footerLinks a{
     color: var(--main-beige);
-}
-
-
-a{text-decoration: none; cursor:pointer;}
-button{cursor:pointer;}
-
-/*FORM*/
-/*INPUT*/
-input,
-input[type="radio"] + label,
-input[type="checkbox"] + label:before,
-select option,
-select, textarea {
-
-    padding: 1em;
-    line-height: 1.4;
-    background-color: #f9f9f9;
-    border: 1px solid #e5e5e5;
-    border-radius: 3px;
-    -webkit-transition: 0.35s ease-in-out;
-    -moz-transition: 0.35s ease-in-out;
-    -o-transition: 0.35s ease-in-out;
-    transition: 0.35s ease-in-out;
-    transition: all 0.35s ease-in-out;
-}
-
-input, textarea{
-    margin-bottom: var(--input-margin);
-}
-
-input:focus,
-textarea:focus {
-    outline: 0;
-    border-color: var(--accent-purple);
-    }
-
-/*SELECT*/
-select:focus,
-select:active {
-    outline: 0;
-}
-select option {
-    background-color: var(--accent-purple);
-    color: #fff;
-}
-
-p{font-family: var(--main-body-text);}
-
-nav, h1,h2,h3,h4,h5,h6{
-    font-family: var(--main-title-text);
-    font-weight: 700;
 }
 
 /*NAVBAR*/
@@ -232,32 +182,69 @@ nav .dropDown p{
     padding: 10px 0px 10px 15px;
 }
 
-
-/*FOOTER*/
-
-footer{
-    margin-top: 10vh;
-    height: 30vh;
-    width: 100vw;
-    background-color: var(--main-purple);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.footerInfo{
-    width: 40vw;
-    margin-left: 2vw;
-}
-.footerLinks{
-    margin-right: 15vw;
-    
-}
-.footerLinks a{
-    color: var(--main-beige);
-}
-
 /*NOT FOUND*/
 
 .notFound{
     margin-top: 20vh;
 }
+
+
+/* RESTERANDE ELEMENT*/
+
+
+a{text-decoration: none; cursor:pointer;}
+button{cursor:pointer;}
+
+/*FORM*/
+/*INPUT*/
+input,
+input[type="radio"] + label,
+input[type="checkbox"] + label:before,
+select option,
+select, textarea {
+
+    padding: 1em;
+    line-height: 1.4;
+    background-color: var(--input-bgc);
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+input, textarea{
+    margin-bottom: var(--input-margin);
+}
+
+input:focus,
+textarea:focus {
+    outline: 0;
+    border-color: var(--accent-purple);
+    }
+
+/*SELECT*/
+select:focus,
+select:active {
+    outline: 0;
+}
+select option {
+    background-color: var(--accent-purple);
+    color: #fff;
+}
+
+p, li{font-family: var(--main-body-text);}
+
+nav, h1,h2,h3,h4,h5,h6{
+    font-family: var(--main-title-text);
+    font-weight: 700;
+}
+
+p, li{
+    font-size:large;
+}
+
+.bold{font-weight: bold;}
+
