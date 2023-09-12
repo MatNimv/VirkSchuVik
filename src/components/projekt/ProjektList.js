@@ -3,7 +3,6 @@ import firebase from '../../firebase';
 import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ProjektList = () => {
-
     const [projekt, setProjekt] = useState([]);
     const [loading, setLoading] = useState(false);
     const {author} = useParams();
@@ -11,6 +10,17 @@ const ProjektList = () => {
     const [gridStyle, setGridStyle] = useState("");
 
     const ref = firebase.firestore().collection("projekt");
+
+    function sortDates(arr){
+
+        console.log(projekt);
+
+        arr.sort((a, b) => {
+            a = a.date.split('/');
+            b = b.date.split('/');
+            return b[2] - a[2] || b[1] - a[1] || b[0] - a[0];
+            });
+    }
 
     function getProjekt() {
         setLoading(true);
@@ -29,6 +39,8 @@ const ProjektList = () => {
             }
         });
     }
+
+    sortDates(projekt);
 
     useEffect(() => {
         getProjekt();

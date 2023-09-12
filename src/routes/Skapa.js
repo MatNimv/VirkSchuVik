@@ -9,15 +9,16 @@ import { ref as storageRef,
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { auth, db, firebase } from "../firebase";
+import { auth, db } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import '../styles/Skapa.css';
 import Preview from '../components/Skapa/Preview';
 import { Editor } from "@tinymce/tinymce-react"; //1. Import TinyMCE Editor
+//import green_wool from '../media/green_wool.png'
+import purple_wool from '../media/purple_wool.png'
 
 const Skapa = () => {
-
     const [user, loading, error] = useAuthState(auth);
     const history = useHistory();
     const currentUser = auth.currentUser;
@@ -168,17 +169,21 @@ const Skapa = () => {
                             <option label="Matilda" value="Matilda"></option>
                         </select>
                     </div>
-                    <div className='middleSpace'></div>
+                    <div className='middleSpace'>
+                        <img src={purple_wool} alt={`${purple_wool}`}></img>
+                        <img src={purple_wool} alt={`${purple_wool}`}></img>
+                        <img src={purple_wool} alt={`${purple_wool}`}></img>
+                    </div>
                     <div className='projectGadgets'>
                     <input type="text" placeholder="Typ av garn" value={yarn} onChange={(e) => setYarn(e.target.value)} ></input>
-                        <input type="text" placeholder="Var garnet är köpt" value={bought} onChange={(e) => setBought(e.target.value)} ></input>
+                        <input type="text" placeholder="Var garnet är köpt" value={bought} onChange={(e) => setBought(e.target.value)}></input>
                         <select value={hook} onChange={(e) => setHook(e.target.value)}>
                             {hookArr.map((hook) => 
                                 <option label={`${hook}mm`} value={`${hook}mm`} key={hook}></option>
                             )}
                         </select>
                         <div className='dateMade'>
-                            <p>Datum projektet skapades dd-mån-åååå format: </p>
+                            <p>Dagens datum</p>
                             <div className='dates'>
                                 <input type="text" placeholder="8" value={dayWr} onChange={(e) => setDayWr(e.target.value)}></input>
                                 <input type="text" placeholder="Feb" value={monthWr} onChange={(e) => setMonthWr(e.target.value)}></input>

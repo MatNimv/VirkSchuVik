@@ -51,6 +51,7 @@ main{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 100vw;
 }
 
 
@@ -61,6 +62,7 @@ main > div{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: var(--main--page-width);
 }
 
 
@@ -146,8 +148,8 @@ nav .userChoices button {
 nav .dropDown{
     border-bottom: 20px;
     position:absolute;
-    bottom: -95px;
-    right: 165px;
+    bottom: -97px;
+    left: 78%;
     background-color: var(--main-beige);
     width:11%;
 }
@@ -165,6 +167,10 @@ nav .dropDown p{
 
 nav .dropDown p{
     transition: all 0.2s ease-in;
+}
+
+nav .userWrapper :first-child{
+    cursor: default;
 }
 
 nav .userWrapper :last-child{

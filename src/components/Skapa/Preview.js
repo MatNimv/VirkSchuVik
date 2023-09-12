@@ -3,6 +3,8 @@ import React from 'react';
 import AddProjekt from '../../functions/AddProjekt';
 import { useState } from "react";
 import purple_wool from '../../media/purple_wool.png'
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 
 
 const Preview = ({projectInfo, isOpen, handleClose}) => {
@@ -10,12 +12,11 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
     const [year, setYear] = useState(0);
     const [month, setMonth] = useState(0);
     const [day, setDay] = useState(0);
+    const history = useHistory();
 
     if (!isOpen) {
         return null;
     }
-
-    console.log(projectInfo);
 
     function getShowDate(){ //skriver ut datumet finare i projektet
         return `${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`;
@@ -35,6 +36,7 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
         setDay(strday);
         setMonth(strmonth);
         setYear(stryear);
+        return `${strday}/${strmonth}/${stryear}`;
     }
 
     const handleUpload = () => {
@@ -48,12 +50,13 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
             bought: projectInfo.bought,
             hero: projectInfo.image,
             id: projectInfo.id,
-            year: year,
-            month: month,
-            day: day,
+            date: getDate(),
             author: projectInfo.author,
             dateShow: getShowDate()
         });
+
+        history.push("/projekt");
+
     }
 
     return ( 
