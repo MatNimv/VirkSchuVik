@@ -29,7 +29,7 @@ const PersonList = () => {
     }, [])
 
     if (loading){
-        return <h1>Laddar...</h1>
+        return <h1>Laddar in information...</h1>
     }
 
     return ( 
@@ -37,11 +37,11 @@ const PersonList = () => {
         {people.map((pep) => (
             
             <div className="person" key={pep.id}>
-                <img src={pep.profilePic} alt={`Bild på ${pep.name}`}></img>
+                <Link to={`/projekt?author=${pep.fname}`}><img src={pep.profilePic} alt={`Bild på ${pep.fname}`}></img></Link>
                 <h3>{pep.fname} {pep.lname}</h3>
-                <p>{pep.description} & <LoremIpsum></LoremIpsum></p>
+                <p>{pep.description}</p>
                 <p>Min favoritvirkning: {pep.favorite}</p>
-                <p>Se {pep.fname}s <Link to={`/projekt?author=${pep.fname}`}>projekt!</Link></p>
+                <p>Se {pep.fname}s <Link to={`/projekt?author=${pep.fname}`}><span className='highlightPurple'>projekt!</span></Link></p>
             </div>
             ))}
         </div>

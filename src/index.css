@@ -19,7 +19,7 @@ Quicksand, Lora,
     --white: white;
 
     /*FONTS*/
-    --main-title-text: 'Montserrat';
+    --main-title-text: 'Montserrat', sans-serif;
     --main-body-text: 'Ruwudu';
 
     /*SIZES*/
@@ -191,7 +191,10 @@ nav .dropDown p{
 /*NOT FOUND*/
 
 .notFound{
-    margin-top: 20vh;
+    margin-top: 10vh;
+}
+.notFound img{
+    width: 100vw;
 }
 
 

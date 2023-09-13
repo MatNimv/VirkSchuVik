@@ -27,18 +27,6 @@ const ProjektArt = () => {
             }
         }
 
-    //async function fetchAuthorProjekt() {
-    //        try {
-    //            const q = query(collection(db, "people"), where("fname", "==", author));
-    //            const doc = await getDocs(q);
-    //            const data = doc.docs[0].data();
-    //            setProjekt(data);
-    //            console.log(data);
-    //        } catch (err) {
-    //            alert("Ett fel uppstod när projektet hämtades. Försök igen.");
-    //        }
-    //    }
-
     useEffect(() => {
         if(id){fetchIdProjekt()};
         //if(author){fetchAuthorProjekt()};

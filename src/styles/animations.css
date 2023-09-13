@@ -58,4 +58,13 @@ button:hover {
   color: black;
   background-color: var(--accent-green);
 }
+.purpleBtn{
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+
+}
+.purpleBtn:hover{
+  background-color: var(--accent-purple);
+  color: black;
+}
 
