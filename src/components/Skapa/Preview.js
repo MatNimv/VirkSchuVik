@@ -64,7 +64,7 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
             <div id="ArtWrapper">
                 <div className='upperInfo'>
                     <h1>{projectInfo.title}</h1>
-                    <p>Av <span className='highlightAuthor'>{projectInfo.author}</span></p>
+                    <p>Av <span className='highlightPurple'>{projectInfo.author}</span></p>
                     <p>{`${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`}</p>
                 </div>
                 <img src={projectInfo.image} alt={projectInfo.title}></img>

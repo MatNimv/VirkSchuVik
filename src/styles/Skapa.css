@@ -93,16 +93,6 @@
     border-radius: var(--main-border-radius);
 }
 
-#ArtWrapper .highlightAuthor{
-    color: var(--main-purple);
-    transition: color .1s ease-in;
-}
-
-#ArtWrapper .highlightAuthor:hover{
-    color: var(--accent-purple);
-    cursor: pointer;
-}
-
 #ArtWrapper img{
     width: 50%;
     border-radius: 10px;

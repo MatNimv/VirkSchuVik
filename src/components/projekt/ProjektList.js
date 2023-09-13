@@ -8,7 +8,6 @@ const ProjektList = () => {
     const [allprojekts, setProjekt] = useState([]);
     const [projektAuthor, setProjektAuthor] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [forfattare, setForfattare] = useState("");
     const [headerTitle, setHeaderTitle] = useState("");
 
     const ref = firebase.firestore().collection("projekt");
@@ -31,13 +30,13 @@ const ProjektList = () => {
                 items.push(doc.data());
             });
 
-            setHeaderTitle("Våra Senaste Projekt")
+            setHeaderTitle("Våra Senaste Projekt");
 
             //om url innehåller author
             if(search.indexOf('author') > -1){
                 const author = search.split('=').pop();
                 items = items.filter((pro) => pro.author === author);
-                setHeaderTitle(`Projekt skapat av ${author}!`);
+                setHeaderTitle(`Projekt skapat av ${author}`);
             }
 
             sortDates(items)
@@ -48,7 +47,7 @@ const ProjektList = () => {
 
     useEffect(() => {
         getProjekt();
-    }, [])
+    }, [search])
 
     if (loading){
         return <h2>Laddar in projekt...</h2>
@@ -57,6 +56,7 @@ const ProjektList = () => {
     return ( 
         <div id="projektListWrapper">
             <h1>{headerTitle}</h1>
+            {search && <h3>Se alla <span className='highlightPurple'><Link to="/projekt">projekt!</Link></span></h3>}
             {allprojekts.map((pro) => (
                 <div className="oneProjektWrapper" key={pro.id}>
                     <Link to={`projekt/${pro.id}`} >

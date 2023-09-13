@@ -254,3 +254,21 @@ p, li{
 
 .bold{font-weight: bold;}
 
+.highlightPurple{
+    color: var(--main-purple);
+    transition: color .1s ease-in;
+}
+
+.highlightPurple:hover{
+    color: var(--accent-purple);
+    cursor: pointer;
+}
+.highlightPurple a{
+    color: var(--main-purple);
+    transition: color .1s ease-in;
+}
+
+.highlightPurple a:hover{
+    color: var(--accent-purple);
+    cursor: pointer;
+}
