@@ -1,4 +1,5 @@
 import HeaderVideo from "../components/Home/HeaderVideo";
+import ProjektGrid from "../components/Home/ProjektGrid";
 import '../styles/Home.css';
 
 const Home = () => {
@@ -9,7 +10,8 @@ const Home = () => {
     return ( 
         <div id="homeWrapper">
             <HeaderVideo></HeaderVideo>
-            <h2>Artiklar</h2>
+            <h1>Några Utvalda Projekt</h1>
+            <ProjektGrid></ProjektGrid>
             {/*{error && <div>{error}</div>}
             { isLoading && <div>Loading...</div>}
             {articles && <ArticleList articles={articles} ></ArticleList>}*/}
