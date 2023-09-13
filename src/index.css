@@ -244,7 +244,7 @@ select option {
     color: #fff;
 }
 
-p, li{font-family: var(--main-body-text);}
+body main p, body main li{font-family: var(--main-body-text);}
 
 nav, h1,h2,h3,h4,h5,h6{
     font-family: var(--main-title-text);

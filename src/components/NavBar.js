@@ -17,7 +17,6 @@ const NavBar = () => {
     async function fetchUserName() {
         if(currentUser){
             const uid = currentUser.uid;
-            console.log(currentUser);
 
             try {
                 const q = query(collection(db, "people"), where("id", "==", uid));

@@ -1,14 +1,15 @@
 #loginWrapper{
-    
+    width: var(--main--page-width);
 }
 
 .loginInputs{
     box-shadow: var(--shadow-light);
-    padding: var(--main-margin) 100px var(--main-margin) 100px;
+    padding: var(--main-margin) 70px var(--main-margin) 70px;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 30%;
 }
 
 .loginInputs p{
@@ -17,4 +18,8 @@
 
 .loginInputs button{
     margin-top: 30px;
+}
+
+.loginInputs input{
+    width: 100%;
 }

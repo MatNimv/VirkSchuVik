@@ -85,10 +85,8 @@ const Skapa = () => {
         onAuthStateChanged(autho, (user) => {
             if (user) {
                 fetchUserName(user.uid);
-                console.log(user);
             } else {
                 history.push("/");
-                console.log(user);
               // User is signed out
             }
         });
@@ -103,7 +101,7 @@ const Skapa = () => {
                     document.querySelector("footer").style.marginTop = "20vh";
                     return false;
                 } else {
-                    document.querySelector("main").style.height = "250vh";
+                    document.querySelector("main").style.height = "280vh";
                     document.querySelector("footer").style.marginTop = "0px";
                     document.querySelector("main").style.backgroundColor = "rgba(172, 172, 172, 0.28)";
                     return true;
@@ -149,12 +147,12 @@ const Skapa = () => {
                                 init={{
                                     height: 300,
                                     toolbar:
-                                    "undo redo | blocks fontsize | bold italic underline | removeformat | link ",
+                                    "undo redo | blocks fontsize | bold italic underline",
                                     menubar: false,
                                     block_formats: "Paragraph=p; Header 1=h3",
                                     content_style: `
                                         body {
-                                            font-family: Arial, sans-serif;
+                                            font-family: Times New Roman, sans-serif;
                                             margin: 12px;
                                         }
                                         h1, h2, h3, p {

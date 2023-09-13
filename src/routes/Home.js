@@ -1,5 +1,6 @@
-import HeaderVideo from "../components/Home/HeaderVideo";
 import ProjektGrid from "../components/Home/ProjektGrid";
+import HeaderVideo from "../components/Home/HeaderVideo";
+
 import '../styles/Home.css';
 
 const Home = () => {

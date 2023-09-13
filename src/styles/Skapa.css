@@ -70,6 +70,7 @@
 /*PREVIEW*/
 
 #PreviewWrapper{
+    margin-top:50vh;
     position: absolute;
     width: 100vw;
     height: 250vh;
@@ -82,7 +83,7 @@
 }
 
 #ArtWrapper{
-    margin-top: 80vh;
+    margin-top:20vh;
     width: var(--main--page-width);
     background-color: var(--white);
     display: flex;
@@ -96,6 +97,13 @@
 #ArtWrapper img{
     width: 50%;
     border-radius: 10px;
+}
+
+.upperInfo{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 #ArtWrapper .textBody{

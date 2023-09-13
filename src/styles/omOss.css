@@ -27,7 +27,7 @@
     border-radius: 150px;
     box-sizing: border-box;
     border: 0px solid white;
-    transition: border .2s ease 0.1s;
+    transition: border .1s ease 0.1s;
 }
 
 .person img:hover{

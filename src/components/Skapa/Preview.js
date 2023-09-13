@@ -18,6 +18,8 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
         return null;
     }
 
+
+
     function getShowDate(){ //skriver ut datumet finare i projektet
         return `${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`;
     }
@@ -39,6 +41,12 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
         return `${strday}/${strmonth}/${stryear}`;
     }
 
+    const setElementsRight = () => {
+        document.querySelector("main").style.backgroundColor = "white";
+        document.querySelector("main").style.height = "auto";
+        document.querySelector("footer").style.marginTop = "20vh";
+    }
+
     const handleUpload = () => {
         getDate()
         //allt gick bra, nu skicka till firebase
@@ -56,7 +64,6 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
         });
 
         history.push("/projekt");
-
     }
 
     return ( 
@@ -73,7 +80,7 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
                 <h3>Fun Facts:</h3>
                     <div className='factsBox'>
                         <ul>
-                            <li><div className='listPic'></div><span className='bold'>Typ av garn :</span>{projectInfo.yarn}</li>
+                            <li><div className='listPic'></div><span className='bold'>Typ av garn: </span>{projectInfo.yarn}</li>
                             <li><div className='listPic'></div><span className='bold'>Garn köpt: </span>{projectInfo.bought}</li>
                             <li><div className='listPic'></div><span className='bold'>Storlek på hook: </span>{projectInfo.hook}</li>
                         </ul>
@@ -82,6 +89,7 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
                 <div className="buttonContainer">
                     <button className="edit" onClick={handleClose}>Fortsätt redigera</button>
                     <button className="upload" onClick={() => {
+                        setElementsRight()
                         handleClose()
                         handleUpload()
                     }}>Ladda upp</button>
@@ -92,26 +100,3 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
 }
 
 export default Preview;
-
-
-//<div id="projektArtWrapper">
-//<div className='oneProjektArtWrapper'>
-//    <div className='upperInfo'>
-//            <h1>{projekt.title}</h1>
-//            <p>av <Link to={`/projekt/${projekt.author}`}>{projekt.author}</Link></p>
-//            <p>{projekt.dateShow}</p>
-//    </div>
-//    <img src={projekt.hero} alt={projekt.title}></img>
-//    <div className='textBody'>{parse(projekt.body)}</div>
-//</div>
-//<div className='projektGadgets'>
-//    <h3>Fun Facts:</h3>
-//    <div className='factsBox'>
-//        <ul>
-//            <li><span className='bold'>Typ av garn: </span>{projekt.yarn}</li>
-//            <li><span className='bold'>Garn köpt: </span>{projekt.bought}</li>
-//            <li><span className='bold'>Storlek på hook: </span>{projekt.hook}</li>
-//        </ul>
-//    </div>
-//</div>
-//</div>
