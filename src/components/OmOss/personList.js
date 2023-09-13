@@ -41,7 +41,7 @@ const PersonList = () => {
                 <h3>{pep.fname} {pep.lname}</h3>
                 <p>{pep.description} & <LoremIpsum></LoremIpsum></p>
                 <p>Min favoritvirkning: {pep.favorite}</p>
-                <p>Se {pep.fname}s <Link to={`/projekt/${pep.fname}`}>projekt!</Link></p>
+                <p>Se {pep.fname}s <Link to={`/projekt?author=${pep.fname}`}>projekt!</Link></p>
             </div>
             ))}
         </div>

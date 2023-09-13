@@ -4,9 +4,6 @@ import '../styles/projekt.css';
 const Projekt = () => {
     return ( 
         <div id="projektWrapper">
-            <h1>
-                Våra Senaste Projekt
-            </h1>
             <ProjektList></ProjektList>
         </div>
     );

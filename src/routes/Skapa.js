@@ -85,8 +85,10 @@ const Skapa = () => {
         onAuthStateChanged(autho, (user) => {
             if (user) {
                 fetchUserName(user.uid);
+                console.log(user);
             } else {
                 history.push("/");
+                console.log(user);
               // User is signed out
             }
         });

@@ -1,20 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import firebase from '../../firebase';
 import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useLocation } from "react-router-dom";
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const ProjektList = () => {
-    const [projekt, setProjekt] = useState([]);
+    const [allprojekts, setProjekt] = useState([]);
+    const [projektAuthor, setProjektAuthor] = useState([]);
     const [loading, setLoading] = useState(false);
-    const {author} = useParams();
-    const [numProjekts, setNumProjects] = useState(0);
-    const [gridStyle, setGridStyle] = useState("");
+    const [forfattare, setForfattare] = useState("");
+    const [headerTitle, setHeaderTitle] = useState("");
 
     const ref = firebase.firestore().collection("projekt");
+    const location = useLocation();
+    const { search } = location;
 
     function sortDates(arr){
-
-        console.log(projekt);
-
         arr.sort((a, b) => {
             a = a.date.split('/');
             b = b.date.split('/');
@@ -30,17 +31,20 @@ const ProjektList = () => {
                 items.push(doc.data());
             });
 
-            setNumProjects(items.length);
+            setHeaderTitle("Våra Senaste Projekt")
+
+            //om url innehåller author
+            if(search.indexOf('author') > -1){
+                const author = search.split('=').pop();
+                items = items.filter((pro) => pro.author === author);
+                setHeaderTitle(`Projekt skapat av ${author}!`);
+            }
+
+            sortDates(items)
             setProjekt(items);
             setLoading(false);
-
-            //beroende på antal projekt, stylas en grid
-            if(items.length ){
-            }
-        });
-    }
-
-    sortDates(projekt);
+            });
+        }
 
     useEffect(() => {
         getProjekt();
@@ -52,22 +56,21 @@ const ProjektList = () => {
 
     return ( 
         <div id="projektListWrapper">
-        {projekt.map((pro) => (
-            <div className="oneProjektWrapper" key={pro.id}>
-                <Link to={`projekt/${pro.id}`} >
-                    <div className='projektInfo'>
-                        <div className='projektText'>
-                            <h2>{pro.title}</h2>
-                            <p>Skapad av: <Link className='strokeText' to={`/projekt${pro.author}/`}>{pro.author}</Link></p>
-                            <p>{pro.dateShow}</p>
+            <h1>{headerTitle}</h1>
+            {allprojekts.map((pro) => (
+                <div className="oneProjektWrapper" key={pro.id}>
+                    <Link to={`projekt/${pro.id}`} >
+                        <div className='projektInfo'>
+                            <div className='projektText'>
+                                <h2>{pro.title}</h2>
+                                <p>Skapad av: <Link className='strokeText' to={`/projekt?author=${pro.author}`}>{pro.author}</Link></p>
+                                <p>{pro.dateShow}</p>
+                            </div>
+                            <img src={pro.hero} alt={pro.title}></img>
                         </div>
-                        <img src={pro.hero} alt={pro.title}></img>
-                    </div>
-                </Link>
-            </div>
-            
+                    </Link>
+                </div>
             ))}
-            
         </div>
     );
 }

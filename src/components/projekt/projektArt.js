@@ -63,7 +63,7 @@ const ProjektArt = () => {
                 <h3>Fun Facts:</h3>
                 <div className='factsBox'>
                     <ul>
-                        <li><div className='listPic'></div><span className='bold'>Typ av garn :</span>{projekt.yarn}</li>
+                        <li><div className='listPic'></div><span className='bold'>Typ av garn: </span>{projekt.yarn}</li>
                         <li><div className='listPic'></div><span className='bold'>Garn köpt: </span>{projekt.bought}</li>
                         <li><div className='listPic'></div><span className='bold'>Storlek på hook: </span>{projekt.hook}</li>
                     </ul>
