@@ -1,6 +1,6 @@
 #SkapaWrapper h1{
     text-align: center;
-    margin-top: 15vh;
+    margin-top: 5vh;
 }
 
 .formContainer{
@@ -115,7 +115,8 @@
     bottom: 5px;
 }
 
-.factsBox .listPic{
+.factsBox .listPic, 
+.OBSListWrapper .listpic{
     background-image: url("../media/purple_wool.png");
     background-repeat: no-repeat;
     background-size: 25px;
@@ -157,5 +158,16 @@ main #SkapaWrapper .openIstrue{margin-top:0px;}
 
 #EditorWrapper .tox-sidebar-wrap{
     background-color: var(--input-bgc);
+}
+
+#OBSWrapper{
+    width: 70%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-light);
+    padding: 20px;
+    border-radius: var(--main-border-radius);
 }
 
