@@ -117,10 +117,25 @@
     flex-direction: column;
 }
 
-.factsBox li{
+.factsBox li,
+.OBSListWrapper li
+{
     list-style: none;
     position: relative;
     bottom: 5px;
+}
+
+.OBSListWrapper li > div{
+    background-image: url("../media/green-wool.png");
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: left center;
+    display: inline-block;
+    height:25px;
+    width:25px;
+    margin-right: 10px;
+    position: relative;
+    bottom:-6px;
 }
 
 .factsBox .listPic, 
@@ -179,3 +194,7 @@ main #SkapaWrapper .openIstrue{margin-top:0px;}
     border-radius: var(--main-border-radius);
 }
 
+#OBSWrapper button {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

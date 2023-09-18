@@ -120,16 +120,14 @@ const Skapa = () => {
             window.addEventListener("click", previewOpen);
         }, [isOpen])
 
-    //    <div id="OBSWrapper">
-    //    <h3>Tänk på detta vid skapande av inlägg: <button onClick={handleDropMenu}>V</button></h3>
-    //    {dropMenu ? <OBS></OBS> : <div></div> }
-    //</div>
-
     return ( 
         
         <div id="SkapaWrapper">
             <h1>Lägg till ett projekt</h1>
-
+            <div id="OBSWrapper">
+                <h3>Tänk på detta vid skapande av inlägg: <button onClick={handleDropMenu}>V</button></h3>
+                {dropMenu ? <OBS></OBS> : <div></div> }
+            </div>
             <Preview className={`openIs${isOpen.toString()}`}
             projectInfo={{
                             title:title, 
