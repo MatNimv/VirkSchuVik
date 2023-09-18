@@ -1,12 +1,31 @@
 import { Link } from 'react-router-dom';
-import LoremIpsum from './LoremIpsum';
+import firebase from '../firebase';
+import React, { useEffect, useState } from "react";
 
 const Footer = () => {
+
+    const [footerText, setFooterText] = useState("");
+
+    function getFooterText() {
+        const ref = firebase.firestore().collection("info");
+        ref.onSnapshot((QuerySnapshot) => {
+            let items = [];
+            QuerySnapshot.forEach((doc) => {
+                items.push(doc.data());
+            });
+            setFooterText(items[0].Footer)
+            });
+        }
+
+        useEffect(() => {
+            getFooterText();
+        })
+
     return ( 
         <footer>
             <div className="footerInfo">
                 <img alt="V S V"></img>
-                <LoremIpsum></LoremIpsum>
+                <p>{footerText}</p>
             </div>
             <div className="footerLinks stroke">
                 <h4><Link to="/projekt">Projekt</Link></h4>

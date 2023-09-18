@@ -142,6 +142,7 @@ video {
 
 .oneGrid .text h2{
     margin-bottom: 0px;
+    color: var(--white);
 }
 
 .oneGrid p {

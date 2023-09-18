@@ -148,7 +148,6 @@ nav .userChoices button {
 nav .dropDown{
     border-bottom: 20px;
     position:absolute;
-    bottom: -97px;
     left: 78%;
     background-color: var(--main-beige);
     width:11%;

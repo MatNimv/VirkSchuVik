@@ -11,8 +11,8 @@ const ProjektGrid = () => {
         let i = array.length;
         while (i > 0) {
           const ri = Math.floor(Math.random() * i);
-          i--;
-          [array[i], array[ri]] = [array[ri], array[i]];
+            i--;
+            [array[i], array[ri]] = [array[ri], array[i]];
         }
         //kortar ner arrayen till griden
         array.length = 3;
@@ -46,10 +46,10 @@ const ProjektGrid = () => {
                         <div className='oneGrid' key={pro.id}>
                         	<div className="card" style={{backgroundImage: `url(${pro.hero})`}}>
                                 <a href={'/projekt/' + pro.id}>
-                                    <div class="gradient" />
-                                    <div class="text">
+                                    <div className="gradient" />
+                                    <div className="text">
                                         <h2>{pro.title}</h2>
-                                        <div class="info-container">
+                                        <div className="info-container">
                                             <h5>av {pro.author}</h5>
                                             <h5>{pro.dateShow}</h5>
                                         </div>

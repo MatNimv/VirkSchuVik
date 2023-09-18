@@ -10,7 +10,6 @@ const PersonList = () => {
     const [loading, setLoading] = useState(false);
 
     const ref = firebase.firestore().collection("people");
-    console.log(ref);
 
     function getPeople() {
         setLoading(true);

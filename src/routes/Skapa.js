@@ -17,6 +17,7 @@ import Preview from '../components/Skapa/Preview';
 import { Editor } from "@tinymce/tinymce-react"; //1. Import TinyMCE Editor
 //import green_wool from '../media/green_wool.png'
 import purple_wool from '../media/purple_wool.png'
+import OBS from '../components/Skapa/OBS';
 
 const Skapa = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -28,7 +29,7 @@ const Skapa = () => {
     const [isOpen, setIsOpen] = useState(false);
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
-    const [isShrunk, setShrunk] = useState(false);
+    const [dropMenu, setDropMenu] = useState(false);
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -60,6 +61,12 @@ const Skapa = () => {
             alert("Ett fel uppstod när användardatan hämtades. Försök igen.");
         }
     }
+
+    //dropdown-obs
+    function handleDropMenu(){
+        setDropMenu(!dropMenu);
+    }
+
 
     let hookArr = ["1", "2", "2,5", "3", "3,5", "4", "4,5", "5", "6", "7", "8", "9", "10"]
 
@@ -113,9 +120,16 @@ const Skapa = () => {
             window.addEventListener("click", previewOpen);
         }, [isOpen])
 
+    //    <div id="OBSWrapper">
+    //    <h3>Tänk på detta vid skapande av inlägg: <button onClick={handleDropMenu}>V</button></h3>
+    //    {dropMenu ? <OBS></OBS> : <div></div> }
+    //</div>
+
     return ( 
         
-        <div id="SkapaWrapper" className="">
+        <div id="SkapaWrapper">
+            <h1>Lägg till ett projekt</h1>
+
             <Preview className={`openIs${isOpen.toString()}`}
             projectInfo={{
                             title:title, 
@@ -131,7 +145,7 @@ const Skapa = () => {
                             id: generatedID
                         }}
             isOpen={isOpen} handleClose={handleClose} />
-            <h1>Lägg till ett projekt</h1>
+
             <div className='formContainer'>
 
                 <div className='formTop'>
@@ -194,7 +208,7 @@ const Skapa = () => {
                 </div>
                 <div className='formDivider'></div>
                 <div className='formBottom'>
-                    <p>Lägg till bild. 1:1 format.</p>
+                    <p>Lägg till bild</p>
                     <input type="file" accept="image/*" 
                         onChange={(event) => {
                                     setImageUpload(event.target.files[0])
