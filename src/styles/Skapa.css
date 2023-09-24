@@ -198,3 +198,48 @@ main #SkapaWrapper .openIstrue{margin-top:0px;}
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+
+/* On screens that are 732 or less */
+@media screen 
+    and (max-width: 732px) 
+    and (min-width: 300px) 
+{ 
+    #OBSWrapper{
+        width: 80vw;
+    }
+    #OBSWrapper h3{
+        font-size: 16px;
+        text-align: center;
+    }
+    #OBSWrapper ul{
+        padding: 0px;
+    }
+    .formContainer{
+        width: 80vw;
+        padding: 75px;
+    }
+    .formTop{
+        flex-direction: column;
+    }
+    .formTop .middleSpace{
+        flex-direction: row;
+    }
+    .projectInit, .middleSpace, .projectGadgets{
+        width: 100%;
+        padding-bottom: var(--main-margin);
+    }
+    #PreviewWrapper #ArtWrapper{
+        margin: 0px;
+        position: relative;
+        bottom: 30vh;
+    }
+    #ArtWrapper{
+        width: 90%;
+    }
+    #ArtWrapper .buttonContainer{
+        width: 80%;
+    }
+    #ArtWrapper .buttonContainer .edit{
+        margin-right: 10px;
+    }
+}
