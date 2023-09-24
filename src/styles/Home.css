@@ -165,3 +165,10 @@ video {
     justify-content: space-between;
     padding-bottom: 20px;
 }
+
+/* On screens that are 732 or less */
+@media (max-width: 732) {
+    .introWrapper h1{
+        font-size: 2px;
+    }
+}

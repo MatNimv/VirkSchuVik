@@ -41,12 +41,9 @@ const NavBar = () => {
     function handleSideMenu(){
         if (sideMenu === true){
             setSideMenu(false);
-            console.log("false");
         } else {
             setSideMenu(true)
-            console.log("true");
         }
-        //setSideMenu(!dropMenu);
     }
 
     //kolla om någon är inloggad eller ej

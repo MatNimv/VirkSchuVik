@@ -25,7 +25,7 @@ const Footer = () => {
         <footer>
             <div className="footerInfo">
                 <img alt="V S V"></img>
-                <p>{footerText}</p>
+            
             </div>
             <div className="footerLinks stroke">
                 <h4><Link to="/projekt">Projekt</Link></h4>

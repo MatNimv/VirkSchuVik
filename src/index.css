@@ -393,8 +393,21 @@ p, li{
 
 /*MOBILE WIDTH*/
 
-/*NAV*/
 /* On screens that are 732 or less */
-@media screen and (max-width: 732) {
-
+@media screen 
+    and (max-width: 732px) 
+    and (min-width: 300px) 
+{ 
+    footer{
+        display:flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    footer .footerLinks{
+        margin: 0px;
+    }
+    .footerInfo img{
+        position:relative;
+        top: 20px;
+    }
 }
