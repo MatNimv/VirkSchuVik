@@ -167,8 +167,15 @@ video {
 }
 
 /* On screens that are 732 or less */
-@media (max-width: 732) {
-    .introWrapper h1{
-        font-size: 2px;
+@media screen 
+    and (max-width: 732px) 
+    and (min-width: 300px) 
+{ 
+    #gridWrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    .oneGrid{
+        width: 100%;
     }
 }

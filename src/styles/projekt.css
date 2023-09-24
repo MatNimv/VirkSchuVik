@@ -157,3 +157,17 @@
     padding: 5px 30px 5px 0px;
     border-radius: var(--main-border-radius);
 }
+
+/* On screens that are 732 or less */
+@media screen 
+    and (max-width: 732px) 
+    and (min-width: 300px) 
+{ 
+    .projektText h2{
+        font-size: 16px;
+    }
+    .oneProjektArtWrapper .textBody,
+    .oneProjektArtWrapper img{
+        width: 90%;
+    }
+}

@@ -410,4 +410,8 @@ p, li{
         position:relative;
         top: 20px;
     }
+    main > div h1{
+        font-size: 30px;
+        
+    }
 }

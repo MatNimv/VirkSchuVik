@@ -77,7 +77,7 @@ const NavBar = () => {
     if(width < 732){
         return ( 
             <div>
-                <nav className='mobile'>
+                <nav className={`mobile scrollis${isShrunk.toString()}`}>
                     <h1>VSV</h1>
                     <div className='middlespace'></div>
                     <div className='hamburger' onClick={handleSideMenu}>
