@@ -7,7 +7,7 @@ const Home = () => {
     return ( 
         <div id="homeWrapper">
             <HeaderVideo></HeaderVideo>
-            <h2>Artiklar</h2>
+            <h2>Några Utvalda Inlägg</h2>
             <ProjektGrid></ProjektGrid>
         </div>
     );

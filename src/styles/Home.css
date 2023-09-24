@@ -178,4 +178,10 @@ video {
     .oneGrid{
         width: 100%;
     }
+    .info-container{
+        padding: 30px 0px 0px 0px;
+    }
+    .info-container h5{
+        margin-bottom: 0px;
+    }
 }

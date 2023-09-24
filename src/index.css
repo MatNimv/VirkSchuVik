@@ -273,7 +273,7 @@ nav.mobile .links{
     display:flex;
     flex-direction: column;
     z-index: 54;
-    bottom: 220px;
+    bottom: 200px;
     align-items: center;
 }
 nav.mobile .links a{
@@ -413,5 +413,12 @@ p, li{
     main > div h1{
         font-size: 30px;
         
+    }
+    #videoWrapper .introWrapper h1 {
+        font-size: 60px;
+    }
+    .introWrapper p{
+        font-size: 16px;
+        width: 70vw;
     }
 }
