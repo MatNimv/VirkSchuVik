@@ -78,7 +78,7 @@ footer{
     align-items: center;
     position:relative;
     bottom: 0;
-    z-index: 100;
+    z-index: 50;
     overflow:hidden;
 }
 .footerInfo{
@@ -187,6 +187,122 @@ nav .dropDown p{
     padding: 10px 0px 10px 15px;
 }
 
+/*mobilanpassning*/
+
+nav.mobile{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+nav.mobile > h1{
+    font-size: 40px;
+    margin-left:10%;
+}
+nav.mobile .middlespace{width: 80%;}
+
+nav.mobile .hamburger{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    right: -7px;
+    z-index: 53;
+}
+nav.mobile .hamburger div{
+    background-color: var(--main-beige);
+    width: 50px;
+    height: 5px;
+    margin: 5px;
+    border-radius: 2px;
+}
+
+nav.mobile .hamburger > div::before,
+nav.mobile .hamburger > div::after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    height: 2px;
+    transition: all  0.4s ease;
+}
+nav.mobile .hamburger > div::after{
+    top: 10px;
+}
+nav.mobile .hamburger > div::before{
+    top: 0;
+    transform: rotate(45deg);
+}
+nav.mobile .hamburger > div::after{
+    top: 0;
+    transform: rotate(135deg);
+}
+nav.mobile .sidebar{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    transition: all .5s ease-in-out;
+
+}
+nav.mobile .userWrapper{
+    width: 100%;
+    margin-top: 230px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+nav.mobile .userWrapper > p:first-child{
+    font-size: 20px;
+    color: black;
+}
+nav.mobile .userWrapper a,
+nav.mobile .userWrapper p
+{
+    font-size: 16px;
+    color: var(--main-beige);
+}
+nav.mobile .divider{
+    width: 70%;
+    background-color: var(--accent-purple);
+    height: 2px;
+    margin-top: 20px;
+}
+nav.mobile .links{
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    z-index: 54;
+    bottom: 220px;
+    align-items: center;
+}
+nav.mobile .links a{
+    margin: 60px;
+    width: 80%;
+    text-align: center;
+}
+
+nav.mobile .openistrue{
+    background-color: var(--main-purple);
+    height: 200vh;
+    position:fixed;
+    right: -0px;
+    z-index: 52;
+    align-items: center;
+}
+nav.mobile .backdroptrue{
+    width: 200vw;
+    height:200vh;
+    position:absolute;
+    pointer-events: auto;
+    z-index: 51;
+    background-color: rgba(0, 0, 0, 0.299);
+}
+nav.mobile .openisfalse{
+    position: absolute;
+    right:-50vw;
+}
+
 /*NOT FOUND*/
 
 .notFound{
@@ -273,4 +389,12 @@ p, li{
 .highlightPurple a:hover{
     color: var(--accent-purple);
     cursor: pointer;
+}
+
+/*MOBILE WIDTH*/
+
+/*NAV*/
+/* On screens that are 732 or less */
+@media screen and (max-width: 732) {
+
 }
