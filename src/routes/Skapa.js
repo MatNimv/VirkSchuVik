@@ -37,10 +37,9 @@ const Skapa = () => {
     const [yarn, setYarn] = useState("");
     const [hook, setHook] = useState("1mm");
     const [bought, setBought] = useState("");
-    const [yearWr, setYearWr] = useState("");
-    const [monthWr, setMonthWr] = useState("");
-    const [dayWr, setDayWr] = useState("");
     const [generatedID, setGeneratedID] = useState("");
+    const [showDate, setShowDate] = useState("");
+    const [date, setDate] = useState("");
 
     //bild
     const [percent, setPercent] = useState(0);
@@ -49,6 +48,50 @@ const Skapa = () => {
 
     //editorn
     const editorRef = useRef(null);
+
+    //för databasen att sortera enligt datum
+    function getDate(){ 
+        let newDate = new Date()
+        let day = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+
+        let strday = day.toString()
+        let strmonth = month.toString();
+        let stryear = year.toString();
+
+        return `${strday}/${strmonth}/${stryear}`;
+    }
+
+    function getShowDate(){
+        let newDate = new Date()
+        let day = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+
+        let strday = day.toString()
+        let strmonth = month.toString();
+        let stryear = year.toString();
+
+        //kabaras för att displaya datumet fint
+        let monthName;
+        if(strmonth == 1){monthName = "Jan"}
+        else if(strmonth == 2){monthName = "Feb"}
+        else if(strmonth == 3){monthName = "Mar"}
+        else if(strmonth == 4){monthName = "Apr"}
+        else if(strmonth == 5){monthName = "Maj"}
+        else if(strmonth == 6){monthName = "Jun"}
+        else if(strmonth == 7){monthName = "Jul"}
+        else if(strmonth == 8){monthName = "Aug"}
+        else if(strmonth == 9){monthName = "Sep"}
+        else if(strmonth == 10){monthName = "Okt"}
+        else if(strmonth == 11){monthName = "Nov"}
+        else if(strmonth == 12){monthName = "Dec"}
+
+        console.log(`${strday} ${monthName} ${stryear}`);
+//
+        return `${strday} ${monthName} ${stryear}`;
+    }
 
     //detta ska göras om till en komponent
     async function fetchUserName(userUID) {
@@ -132,15 +175,15 @@ const Skapa = () => {
             projectInfo={{
                             title:title, 
                             body:body,
-                            dayWr:dayWr, 
-                            monthWr:monthWr,
-                            yearWr:yearWr,
                             yarn:yarn,
                             bought:bought,
                             image: storageUrl,
                             hook: hook,
                             author: author,
-                            id: generatedID
+                            id: generatedID,
+                            date: getDate(),
+                            dateShow: getShowDate()
+
                         }}
             isOpen={isOpen} handleClose={handleClose} />
 
@@ -194,14 +237,6 @@ const Skapa = () => {
                                 <option label={`${hook}mm`} value={`${hook}mm`} key={hook}></option>
                             )}
                         </select>
-                        <div className='dateMade'>
-                            <p>Dagens datum</p>
-                            <div className='dates'>
-                                <input type="text" placeholder="8" value={dayWr} onChange={(e) => setDayWr(e.target.value)}></input>
-                                <input type="text" placeholder="Feb" value={monthWr} onChange={(e) => setMonthWr(e.target.value)}></input>
-                                <input type="text" placeholder="1999" value={yearWr} onChange={(e) => setYearWr(e.target.value)}></input>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className='formDivider'></div>

@@ -8,37 +8,12 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const Preview = ({projectInfo, isOpen, handleClose}) => {
-
-    const [year, setYear] = useState(0);
-    const [month, setMonth] = useState(0);
-    const [day, setDay] = useState(0);
     const history = useHistory();
+
+    console.log(projectInfo.dateShow);
 
     if (!isOpen) {
         return null;
-    }
-
-
-
-    function getShowDate(){ //skriver ut datumet finare i projektet
-        return `${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`;
-    }
-
-    //för databasen att sortera enligt datum
-    function getDate(){ 
-        let newDate = new Date()
-        let day = newDate.getDate();
-        let month = newDate.getMonth() + 1;
-        let year = newDate.getFullYear();
-
-        let strday = day.toString()
-        let strmonth = month.toString();
-        let stryear = year.toString();
-
-        setDay(strday);
-        setMonth(strmonth);
-        setYear(stryear);
-        return `${strday}/${strmonth}/${stryear}`;
     }
 
     const setElementsRight = () => {
@@ -48,7 +23,6 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
     }
 
     const handleUpload = () => {
-        getDate()
         //allt gick bra, nu skicka till firebase
         AddProjekt({ 
             title: projectInfo.title, 
@@ -58,12 +32,14 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
             bought: projectInfo.bought,
             hero: projectInfo.image,
             id: projectInfo.id,
-            date: getDate(),
+            date: projectInfo.date,
             author: projectInfo.author,
-            dateShow: getShowDate()
+            dateShow: projectInfo.dateShow
         });
 
-        history.push("/projekt");
+        setTimeout(() => {
+            history.push("/projekt");
+        }, 100000);
     }
 
     return ( 
@@ -72,7 +48,7 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
                 <div className='upperInfo'>
                     <h1>{projectInfo.title}</h1>
                     <p>Av <span className='highlightPurple'>{projectInfo.author}</span></p>
-                    <p>{`${projectInfo.dayWr} ${projectInfo.monthWr} ${projectInfo.yearWr}`}</p>
+                    <p>{projectInfo.dateShow}</p>
                 </div>
                 <img src={projectInfo.image} alt={projectInfo.title}></img>
                 <div className='textBody'>{parse(projectInfo.body)}</div>

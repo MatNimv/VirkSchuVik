@@ -41,7 +41,7 @@ const ProjektArt = () => {
             <div className='oneProjektArtWrapper'>
                 <div className='upperInfo'>
                         <h1>{projekt.title}</h1>
-                        <p>av <Link to={`/projekt/${projekt.author}`}>{projekt.author}</Link></p>
+                        <p>av <Link to={`/projekt?author=${projekt.author}`}>{projekt.author}</Link></p>
                         <p>{projekt.dateShow}</p>
                 </div>
                 <img src={projekt.hero} alt={projekt.title}></img>
