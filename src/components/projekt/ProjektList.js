@@ -3,6 +3,7 @@ import firebase from '../../firebase';
 import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useLocation } from "react-router-dom";
 import { useAuthState } from 'react-firebase-hooks/auth';
+import useWindowDimensions from '../../functions/getWindowDimensions';
 
 const ProjektList = () => {
     const [allprojekts, setProjekt] = useState([]);
@@ -13,6 +14,7 @@ const ProjektList = () => {
     const ref = firebase.firestore().collection("projekt");
     const location = useLocation();
     const { search } = location;
+    const { height, width } = useWindowDimensions();
 
     function sortDates(arr){
         arr.sort((a, b) => {
@@ -53,26 +55,54 @@ const ProjektList = () => {
         return <h2>Laddar in projekt...</h2>
     }
 
-    return ( 
-        <div id="projektListWrapper">
-            <h1>{headerTitle}</h1>
-            {search && <h3>Se alla <span className='highlightPurple'><Link to="/projekt">projekt!</Link></span></h3>}
-            {allprojekts.map((pro) => (
-                <div className="oneProjektWrapper" key={pro.id}>
-                    <Link to={`projekt/${pro.id}`} >
-                        <div className='projektInfo'>
-                            <div className='projektText'>
-                                <h2>{pro.title}</h2>
-                                <p>Skapad av: <Link className='strokeText' to={`/projekt?author=${pro.author}`}>{pro.author}</Link></p>
-                                <p>{pro.dateShow}</p>
+    //annat mobilformat
+    if(width < 732){
+        return ( 
+            <div id="ProjektGridWrapper" className='mobile'>
+                <h1>{headerTitle}</h1>
+                <div id="gridWrapper">
+                    {allprojekts.map((pro) => (
+                        <div className='oneGrid' key={pro.id}>
+                        	<div className="card" style={{backgroundImage: `url(${pro.hero})`}}>
+                                <a href={'/projekt/' + pro.id}>
+                                    <div className="gradient" />
+                                    <div className="text">
+                                        <h2>{pro.title}</h2>
+                                        <div className="info-container">
+                                            <h5>av {pro.author}</h5>
+                                            <h5>{pro.dateShow}</h5>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                            <img src={pro.hero} alt={pro.title}></img>
                         </div>
-                    </Link>
+                    ))}
                 </div>
-            ))}
-        </div>
-    );
+            </div>
+        );
+    } else {
+
+        return ( 
+            <div id="projektListWrapper">
+                <h1>{headerTitle}</h1>
+                {search && <h3>Se alla <span className='highlightPurple'><Link to="/projekt">projekt!</Link></span></h3>}
+                {allprojekts.map((pro) => (
+                    <div className="oneProjektWrapper" key={pro.id}>
+                        <Link to={`projekt/${pro.id}`} >
+                            <div className='projektInfo'>
+                                <div className='projektText'>
+                                    <h2>{pro.title}</h2>
+                                    <p>Skapad av: <Link className='strokeText' to={`/projekt?author=${pro.author}`}>{pro.author}</Link></p>
+                                    <p>{pro.dateShow}</p>
+                                </div>
+                                <img src={pro.hero} alt={pro.title}></img>
+                            </div>
+                        </Link>
+                    </div>
+                ))}
+            </div>
+        );
+    }
 }
 
 export default ProjektList;

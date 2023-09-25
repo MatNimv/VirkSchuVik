@@ -5,7 +5,6 @@ import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import getWindowDimensions from '../functions/getWindowDimensions';
 import useWindowDimensions from '../functions/getWindowDimensions';
 
 const NavBar = () => {
@@ -13,9 +12,7 @@ const NavBar = () => {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const currentUser = auth.currentUser;
-    const { height, width } = useWindowDimensions();
-
-    console.log(width);
+    const { width } = useWindowDimensions();
 
     const [dropMenu, setDropMenu] = useState(false);
     const [sideMenu, setSideMenu] = useState(false);
@@ -77,7 +74,7 @@ const NavBar = () => {
     if(width < 732){
         return ( 
             <div>
-                <nav className={`mobile scrollis${isShrunk.toString()}`}>
+                <nav className={`mobile scrollis${isShrunk.toString()}mobile`}>
                     <h1>VSV</h1>
                     <div className='middlespace'></div>
                     <div className='hamburger' onClick={handleSideMenu}>
@@ -89,16 +86,17 @@ const NavBar = () => {
                     <div className={`sidebar openis${sideMenu}`}>
                         { user && 
                             <div className='userWrapper'>
-                                <p>Hej {name}!</p>
+                                <div className='divider'></div>
+                                <h4>Hej {name}!</h4>
                                 <Link to="/Skapa">Skapa inlägg</Link>
                                 <p onClick={logout}>Logga ut</p> 
-                                <div className='divider'></div>
                             </div>
                         }
                             <div className='links'>
                                 <Link to="/">Hem</Link>
                                 <Link to="/projekt">Projekt</Link>
                                 <Link to="/omOss">Om Oss</Link>
+                                
                             </div>
                     
                     </div>

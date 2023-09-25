@@ -23,3 +23,18 @@
 .loginInputs input{
     width: 100%;
 }
+
+/* On screens that are 732 or less */
+@media screen 
+    and (max-width: 732px) 
+    and (min-width: 300px) 
+{ 
+    #loginWrapper{
+        width: 150vw;
+    }
+    .emailInput, .passInput{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

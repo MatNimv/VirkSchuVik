@@ -158,6 +158,13 @@
     border-radius: var(--main-border-radius);
 }
 
+#ProjektGridWrapper{
+    flex-direction: column;
+}
+#ProjektGridWrapper h1{
+    text-align: center;
+}
+
 /* On screens that are 732 or less */
 @media screen 
     and (max-width: 732px) 

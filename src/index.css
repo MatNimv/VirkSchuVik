@@ -110,16 +110,18 @@ nav{
     top: 0; /* At the top */
     z-index: 99; 
 }
-.scrollisfalse{
+.scrollisfalse, .scrollisfalsemobile{
     padding: 3vh 20px; /* Large padding which will shrink on scroll (using JS) */
 }
-.scrollistrue{
+.scrollistrue, .scrollistruemobile{
     padding: 0vh 20px;
 }
 .scrollistrue a{font-size: medium;}
 .scrollistrue h1{font-size: x-large;}
+
 .scrollisfalse h1{font-size: xx-large;}
 .scrollisfalse a{font-size: x-large;}
+
 nav h1{
     font-weight:800; 
 }
@@ -246,15 +248,11 @@ nav.mobile .sidebar{
 }
 nav.mobile .userWrapper{
     width: 100%;
-    margin-top: 230px;
-    position: relative;
+    bottom: 13vh;
+    position: absolute;
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-nav.mobile .userWrapper > p:first-child{
-    font-size: 20px;
-    color: black;
 }
 nav.mobile .userWrapper a,
 nav.mobile .userWrapper p
@@ -273,11 +271,11 @@ nav.mobile .links{
     display:flex;
     flex-direction: column;
     z-index: 54;
-    bottom: 200px;
+    top: 110vh;
     align-items: center;
 }
 nav.mobile .links a{
-    margin: 60px;
+    margin: 6vh;
     width: 80%;
     text-align: center;
 }
@@ -405,17 +403,27 @@ p, li{
     }
     footer .footerLinks{
         margin: 0px;
+        position: relative;
+        bottom: 2vh;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
-    .footerInfo img{
+    .footerLinks h4{
+        margin-top: 2vh;
+        font-size: 16px;
+    }
+    .footerInfo{
         position:relative;
-        top: 20px;
+        margin-left:0px;
     }
     main > div h1{
         font-size: 30px;
         
     }
     #videoWrapper .introWrapper h1 {
-        font-size: 60px;
+        font-size: 14vw;
     }
     .introWrapper p{
         font-size: 16px;
