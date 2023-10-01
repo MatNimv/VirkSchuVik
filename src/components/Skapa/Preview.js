@@ -37,9 +37,7 @@ const Preview = ({projectInfo, isOpen, handleClose}) => {
             dateShow: projectInfo.dateShow
         });
 
-        setTimeout(() => {
-            history.push("/projekt");
-        }, 100000);
+        history.push("/projekt");
     }
 
     return ( 
