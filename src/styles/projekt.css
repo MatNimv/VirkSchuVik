@@ -41,14 +41,6 @@
     bottom: 1vh;
     box-shadow: var(--shadow-dark);
 }
-
-.oneProjektWrapper img{
-    width: 20vw;
-    height:50vh;
-    background-position: center;
-    background-size:contain;
-}
-
 .projektInfo{
     display:flex;
     flex-direction: row;
@@ -73,17 +65,23 @@
 
 .projektText h2{color: var(--main-white)}
 
+.projektText .previewText{
+    color: var(--main-purple);
+}
+
 .oneProjektWrapper .projektText{
     display:flex;
     justify-content: start;
 } 
+
+
 .oneProjektWrapper img{
     display:flex;
-    background-size: cover;
     background-repeat: no-repeat;
+    object-fit: cover;
     background-position: center center;
-    width: 35%;
-    height: 60%;
+    width: 300px;
+    height: 300px;
     border-radius: 20px;
     position: relative;
     border-color: 2px var(--accent-purple);
@@ -177,5 +175,6 @@
     .oneProjektArtWrapper img{
         width: 90%;
     }
+
 
 }

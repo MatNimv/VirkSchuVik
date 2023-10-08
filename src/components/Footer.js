@@ -31,7 +31,7 @@ const Footer = () => {
             
             </div>
             <div className="footerLinks stroke">
-                <h4><Link to="/projekt">Projekt</Link></h4>
+                <h4><Link to="/projekt">Inlägg</Link></h4>
                 <h4><Link to="/omOss">Om Oss</Link></h4>
                 
                 {user ? 

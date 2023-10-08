@@ -1,5 +1,20 @@
 import { useState, useEffect } from 'react';
 import firebase from '../../firebase';
+import parse from 'html-react-parser';
+
+function renderPreviewText(text){
+    let slicedText = text.slice(0,80);
+    let finishedText = slicedText + "...</p>";
+    let parsedText = parse(finishedText)
+    return parsedText;
+}
+
+function renderPreviewTextMobile(text){
+    let slicedText = text.slice(0,30);
+    let finishedText = slicedText + "...</p>";
+    let parsedText = parse(finishedText)
+    return parsedText;
+}
 
 
 const ProjektGrid = () => {

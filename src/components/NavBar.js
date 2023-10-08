@@ -94,7 +94,7 @@ const NavBar = () => {
                         }
                             <div className='links'>
                                 <Link to="/">Hem</Link>
-                                <Link to="/projekt">Projekt</Link>
+                                <Link to="/projekt">Inlägg</Link>
                                 <Link to="/omOss">Om Oss</Link>
                                 
                             </div>
@@ -113,7 +113,7 @@ const NavBar = () => {
             <h1>V S V</h1>
             <div className='stroke'>
                 <Link to="/">Hem</Link>
-                <Link to="/projekt">Projekt</Link>
+                <Link to="/projekt">Inlägg</Link>
                 <Link to="/omOss">Om Oss</Link>
             </div>
             <div className='userWrapper'>

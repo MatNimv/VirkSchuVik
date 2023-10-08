@@ -140,9 +140,23 @@ video {
     z-index: 10;
 }
 
+.oneGrid .text .previewText p{
+    color: white;
+    font-size: 16px;
+    padding: 50px 0px 0px 0px;
+    margin:0px;
+    position: relative;
+    top: 10px;
+    opacity: 0.9;
+}
+.oneGrid .text > span{
+    margin:0px;
+}
+
 .oneGrid .text h2{
     margin-bottom: 0px;
     color: var(--white);
+    margin:0px;
 }
 
 .oneGrid p {
@@ -179,9 +193,10 @@ video {
         width: 100%;
     }
     .info-container{
-        padding: 30px 0px 0px 0px;
+        padding: 0px;
     }
     .info-container h5{
         margin-bottom: 0px;
     }
+
 }

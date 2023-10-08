@@ -100,6 +100,7 @@ const Skapa = () => {
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
             setName(data.fname);
+            setAuthor(data.fname);
         } catch (err) {
             alert("Ett fel uppstod när användardatan hämtades. Försök igen.");
         }
