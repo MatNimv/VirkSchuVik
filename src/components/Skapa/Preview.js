@@ -10,8 +10,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const Preview = ({projectInfo, isOpen, handleClose}) => {
     const history = useHistory();
 
-    console.log(projectInfo.dateShow);
-
     if (!isOpen) {
         return null;
     }

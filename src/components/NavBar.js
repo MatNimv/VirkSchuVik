@@ -96,6 +96,7 @@ const NavBar = () => {
                                 <Link to="/">Hem</Link>
                                 <Link to="/projekt">Inlägg</Link>
                                 <Link to="/omOss">Om Oss</Link>
+                                {!user && <Link to="/login">Admin</Link>}
                                 
                             </div>
                     
@@ -126,7 +127,9 @@ const NavBar = () => {
                     </div>
                         : 
                     <div></div>}
+                    
                 </div> }
+                {!user && <Link className="admin" to="/login">Admin</Link>}
             </div>
         </nav>
     );

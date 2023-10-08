@@ -217,11 +217,6 @@ const Skapa = () => {
                                 }}
                         />
                         </div>
-                        <select value={author} onChange={(e) => setAuthor(e.target.value)}>
-                            <option label="Kajsa" value="Kajsa"></option>
-                            <option label="Lucas" value="Lucas"></option>
-                            <option label="Matilda" value="Matilda"></option>
-                        </select>
                     </div>
                     <div className='middleSpace'>
                         <img src={purple_wool} alt={`${purple_wool}`}></img>
