@@ -14,11 +14,11 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import '../styles/Skapa.css';
 import Preview from '../components/Skapa/Preview';
-import { Editor } from "@tinymce/tinymce-react"; //1. Import TinyMCE Editor
-//import green_wool from '../media/green_wool.png'
+//import { Editor } from "../tinymce/tinymce.min.js"; //1. Import TinyMCE Editor
+import { Editor } from '@tinymce/tinymce-react';
 import purple_wool from '../media/purple_wool.png'
 import OBS from '../components/Skapa/OBS';
-
+//tinymce-react
 const Skapa = () => {
     const [user, loading, error] = useAuthState(auth);
     const history = useHistory();
@@ -87,8 +87,6 @@ const Skapa = () => {
         else if(strmonth == 10){monthName = "Okt"}
         else if(strmonth == 11){monthName = "Nov"}
         else if(strmonth == 12){monthName = "Dec"}
-
-        console.log(`${strday} ${monthName} ${stryear}`);
 //
         return `${strday} ${monthName} ${stryear}`;
     }
@@ -194,8 +192,8 @@ const Skapa = () => {
                         
                         <input type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)}></input>
                         <div id="EditorWrapper">
-                            <Editor
-                                tinymceScriptSrc={process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"}
+                        <Editor
+                                apiKey="wnj54b6loldkcpidz7t0wbh3ms8c9wuwf5t8mi84dxo20a1r"
                                 onChange={(e) => setBody(e.target.value)}
                                 value={body}
                                 onInit={(evt, editor) => editorRef.current = editor}
@@ -214,9 +212,9 @@ const Skapa = () => {
                                             color: #08080d;
                                             margin: 10px;
                                         }
-                                        `,
+                                        `
                                 }}
-                            />
+                        />
                         </div>
                         <select value={author} onChange={(e) => setAuthor(e.target.value)}>
                             <option label="Kajsa" value="Kajsa"></option>
